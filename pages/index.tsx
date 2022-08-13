@@ -25,26 +25,26 @@ const Home: NextPage = () => {
   },[])
 
   return (
-    <>
-    <head>
-      <title>Chrono</title>
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
-      </style>
-    </head>
-    <div className='Background '>
-      <h1 className=" text-6xl text-center pt-4 text-white">
-        Chrono
-      </h1>
-      <Timer
-        quote={dailyQuote}
-       />
-       <Button className=' absolute top-4 left-4 text-xl' onClick={() => setOpen(true)}>Open</Button>
-       <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
-        Hui
-       </Drawer>
+    <div>
+      <head>
+        <title>Chrono</title>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+        </style>
+      </head>
+      <div className='Background '>
+        <h1 className=" text-6xl text-center pt-4 text-white">
+          Chrono
+        </h1>
+        <Timer
+          quote={dailyQuote}
+        />
+        <Button className=' absolute top-4 left-4 text-xl' onClick={() => setOpen(true)}>Open</Button>
+        <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
+          Hui
+        </Drawer>
+      </div>
     </div>
-    </>
   )
 }
 

@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .Background {
-	background: linear-gradient(-45deg, #2C2E43, #000000);
+	background: linear-gradient(-45deg, #E8F9FD, #FF1E00);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 	height: 100vh;

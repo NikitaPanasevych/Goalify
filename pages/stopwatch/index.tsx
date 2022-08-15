@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 //components
-import Timer from './components/Stopwatch/Stopwatch'
-import Topbar from './components/Stopwatch/Topbar'
+import Timer from '../../components/Stopwatch/Stopwatch'
+import Topbar from '../../components/Stopwatch/Topbar'
 //other
-import quoteData from "../public/quoteData"
+import quoteData from "../../public/quoteData"
 
 
 const Home: NextPage = () => {
@@ -20,12 +20,6 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <head>
-        <title>Chrono</title>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
-        </style>
-      </head>
       <div className='Background grid'>
         <Topbar />
         <Timer

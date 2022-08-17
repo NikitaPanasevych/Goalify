@@ -26,3 +26,8 @@
 html{
 	font-family: 'Rajdhani', sans-serif;
 }
+
+.customGrid{
+	display: grid;
+	grid-template-columns: 2em auto;
+}

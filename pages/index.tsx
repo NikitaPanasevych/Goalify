@@ -14,7 +14,7 @@ const Homepage : NextPage = () => {
                 <a href="./stopwatch">Stopwatch</a>
             </div>
             <div className=" text-6xl grid text-center">
-                Planner
+                <a href="./planner">Planner</a>
             </div>
             <Button variant="text">Sign In</Button>
         </div>

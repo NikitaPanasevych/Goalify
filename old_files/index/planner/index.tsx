@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import { app, database} from "../../firebase/clientAPP";
+import { app, database} from "../../../firebase/clientAPP";
 import { collection, addDoc, getFirestore , getDocs} from 'firebase/firestore';
 
 
 //components
-import CreateTask from '../../components/Planner/TaskCreate';
-import TaskList from '../../components/Planner/TaskList';
+import CreateTask from '../../Planner/TaskCreate';
+import TaskList from '../../Planner/TaskList';
 
 const Planner : NextPage = () => {
 

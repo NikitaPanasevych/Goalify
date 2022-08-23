@@ -1,13 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Lora&display=swap');
+/* font-family: 'Aboreto', cursive;
+font-family: 'Lora', serif; */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html{
-	font-family: 'Rajdhani', sans-serif;
+	font-family: 'Aboreto', cursive;
 }
 
+
+
+
+
+
+
+
+
+
+/* Old files custom designs */
 .customGrid{
 	display: grid;
 	grid-template-columns: 2em auto;

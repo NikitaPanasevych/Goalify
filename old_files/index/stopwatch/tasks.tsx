@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 //firebase
-import { app, database} from "../../firebase/clientAPP"
+import { app, database} from "../../../firebase/clientAPP"
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 //components 
-import Card from "../../components/Stopwatch/Card";
+import Card from "../../Stopwatch/Card";
 import { TextField } from "@mui/material";
 
 

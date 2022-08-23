@@ -13,8 +13,21 @@ html{
 	grid-template-columns: 2em auto;
 }
 
-/* LoggedIn.tsx */
+/* Guest.tsx */
 
-li {
-	cursor: pointer;
-}
+.logo {
+	animation: rotation 24s infinite linear;
+  }
+  
+  @keyframes rotation {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(359deg);
+	}
+  }
+
+  .Bg {
+	background-image: radial-gradient(#3D0000 40%, #000000 60%);
+  }

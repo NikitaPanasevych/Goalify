@@ -16,8 +16,6 @@ const Login : NextPage = () => {
       password: ''
     });
 
-    const
-
     const [showPass, setPass] = useState(false);
 
     const userCollection = collection(database, 'users');
@@ -26,7 +24,7 @@ const Login : NextPage = () => {
     useEffect(() => {
       const getUsers = async () => {
         const data = await getDocs(userCollection);
-
+        
       }
     }, [])
 

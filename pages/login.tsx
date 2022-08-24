@@ -16,7 +16,7 @@ const Login : NextPage = () => {
       password: ''
     });
 
-    const [showPass, setPass] = useState(false);
+    const [showPass, setPass] = useState(true);
 
     const userCollection = collection(database, 'users');
     console.log(userCollection);
@@ -40,6 +40,10 @@ const Login : NextPage = () => {
       showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
     }
 
+    const showText = () => {
+
+    }
+
     return (
         <div className="flex">
             <title>Login</title>
@@ -50,7 +54,7 @@ const Login : NextPage = () => {
                   <input type="text" id="user-username" name="username" placeholder="Username or email" value={user.username} onChange={handleChange}/>
                   <div className="">
                     <input type="password" id="user-password" name="password" placeholder="Password" value={user.password} onChange={handleChange} />
-                    {showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
+                    {showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword}/> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword}/>}
                   </div>
                   
                   <button type="button">Login</button>

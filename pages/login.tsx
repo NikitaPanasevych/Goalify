@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import { app, database} from "./index";
 import { collection, addDoc, getFirestore , getDocs} from 'firebase/firestore';
@@ -16,10 +16,19 @@ const Login : NextPage = () => {
       password: ''
     });
 
+    const
+
     const [showPass, setPass] = useState(false);
 
     const userCollection = collection(database, 'users');
     console.log(userCollection);
+
+    useEffect(() => {
+      const getUsers = async () => {
+        const data = await getDocs(userCollection);
+
+      }
+    }, [])
 
     //Functions
 

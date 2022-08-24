@@ -9,8 +9,79 @@ font-family: 'Lora', serif; */
 
 html{
 	font-family: 'Rajdhani', sans-serif;
+	font-size: 1.2em;
 }
 
+
+/* Login page  */
+.login-page{
+	margin: 4em auto;
+}
+
+.login-page h1{
+	font-size: 4em;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.login-page p{
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.login-page .form{
+	margin: 2em;
+	width: 20em;
+	height: 20em;
+	overflow: auto;
+	padding-top: 1em;
+}
+.login-page .form  input{
+	background-color: rgb(240, 240, 240, 0.5);
+	display: block;
+	margin: 1em auto;
+	padding: .2em .5em;
+	width: 13em;
+	font-size: 1.2em;
+	border-radius: .3em;
+}
+
+.login-page .form input:focus{
+	background-color: white;
+}
+
+.login-page .form > button{
+	/* className=" scale-125 block mx-auto my-4 py-1 px-16 bg-blue-700 text-white" */
+	display: block;
+	scale: 125%;
+	padding: .2em 4em;
+	color: white;
+	background-color: rgb(73, 73, 248);
+	margin: 1.5em auto;
+	border-radius: .3em;
+}
+
+.login-page .form > button:hover{
+	background-color: blue;
+}
+
+.login-page .form > a{
+	display: block;
+	margin: .5em auto;
+	text-align: center;
+}
+.login-page .form > a:hover{
+	color: rgb(133, 133, 133);
+}
+
+.login-page .visibilityOn, .visibilityOff{
+	position: absolute;
+	cursor: pointer;
+	transform: translateY(-2em);
+	transform: translate(10em, -2em);
+}
 
 /* Old files custom designs */
 .customGrid{

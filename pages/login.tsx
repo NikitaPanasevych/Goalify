@@ -4,14 +4,24 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import {useState} from 'react';
 
+import { app, database} from "./index";
+import { collection, addDoc, getFirestore , getDocs} from 'firebase/firestore';
+
 const Login : NextPage = () => {
 
+
+  // Variables and hooks
     const [user, setUser] = useState({
       username: '',
       password: ''
     });
 
     const [showPass, setPass] = useState(false);
+
+    const userCollection = collection(database, 'users');
+    console.log(userCollection);
+
+    //Functions
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setUser({...user, [e.target.name]: [e.target.value]});

@@ -1,22 +1,23 @@
 import { NextPage } from "next"
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import { motion, AnimatePresence } from "framer-motion"
 import {useEffect, useState} from 'react';
-
+//Components
+import SignUp from "../components/loginComponents/SignUp";
+import LogIn from "../components/loginComponents/LogIn";
+import {ButtonGroup} from "@mui/material";
+import { Button } from "@mui/material";
+//firebase
 import { app, database} from "./index";
 import { collection, addDoc, getFirestore , getDocs} from 'firebase/firestore';
+import { Opacity, Translate } from "@mui/icons-material";
+
+
 
 const Login : NextPage = () => {
 
-
   // Variables and hooks
-    const [user, setUser] = useState({
-      username: '',
-      password: ''
-    });
-
-    const [showPass, setPass] = useState(true);
+    
+  const [mode, setMode] = useState("sign up");
 
     const userCollection = collection(database, 'users');
     console.log(userCollection);
@@ -28,42 +29,21 @@ const Login : NextPage = () => {
       }
     }, [])
 
-    //Functions
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setUser({...user, [e.target.name]: [e.target.value]});
-    }
-
-    const showPassword = () => {
-      setPass(!showPass);
-      const password = document.getElementById('user-password');
-      showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
-    }
-
-    const showText = () => {
-
-    }
 
     return (
-        <div className="flex">
+      
+        <div className="flex login-page-Bg h-screen">
             <title>Login</title>
-            <div className="login-page">
-                    <h1><a href='/'>Vision</a></h1>
-                    <p>Sign In</p>
-                <div className="form" >
-                  <input type="text" id="user-username" name="username" placeholder="Username or email" value={user.username} onChange={handleChange}/>
-                  <div className="">
-                    <input type="password" id="user-password" name="password" placeholder="Password" value={user.password} onChange={handleChange} />
-                    {showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword}/> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword}/>}
-                  </div>
-                  
-                  <button type="button">Login</button>
-                  <a href="">Forgot your password?</a>
-                  <hr className="text-black" />
-
-                </div>
+            <div className="login-page pt-5 bg-gradient-to-t from-white to-[#FFF89A] rounded-xl">
+                    <div className=" grid">
+                      <h1><a href='/guest'>Vision</a></h1>
+                      <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
+                        <Button type="submit" onClick={()=>setMode("sign up")}>Sign up</Button>
+                        <Button  onClick={()=>setMode("log in")}>Log in</Button>
+                      </ButtonGroup>
+                    </div>  
+                {mode === "sign up" ? <SignUp /> : <LogIn/>}
             </div>
-            
         </div>
     )
 }

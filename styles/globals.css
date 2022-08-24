@@ -14,8 +14,16 @@ html{
 
 
 /* Login page  */
+.login-page-Bg {
+	background-image: url("../public/layered-waves-haikei\ \(2\).svg");
+	background-size: 100%, 100%;
+}
+
+
 .login-page{
 	margin: 4em auto;
+	margin-left: 50%;
+	width: 40rem;
 }
 
 .login-page h1{
@@ -32,7 +40,7 @@ html{
 }
 
 .login-page .form{
-	margin: 2em;
+	margin: auto;
 	width: 20em;
 	height: 20em;
 	overflow: auto;
@@ -52,21 +60,6 @@ html{
 	background-color: white;
 }
 
-.login-page .form > button{
-	/* className=" scale-125 block mx-auto my-4 py-1 px-16 bg-blue-700 text-white" */
-	display: block;
-	scale: 125%;
-	padding: .2em 4em;
-	color: white;
-	background-color: rgb(73, 73, 248);
-	margin: 1.5em auto;
-	border-radius: .3em;
-}
-
-.login-page .form > button:hover{
-	background-color: blue;
-}
-
 .login-page .form > a{
 	display: block;
 	margin: .5em auto;
@@ -79,8 +72,8 @@ html{
 .login-page .visibilityOn, .visibilityOff{
 	position: absolute;
 	cursor: pointer;
-	transform: translateY(-2em);
-	transform: translate(10em, -2em);
+	transform: translateY(-8em);
+	transform: translate(-1.5em, 0.5em);
 }
 
 /* Old files custom designs */
@@ -94,6 +87,17 @@ html{
 .logo {
 	animation: rotation 24s infinite linear;
   }
+
+.arrow {
+	fill: #9ADCFF;
+	animation: arrow 4s infinite linear;
+}
+
+	@keyframes arrow {
+		0% { fill: #9ADCFF; }
+		50% {fill: #FFF89A}
+		100% { fill: #9ADCFF; }
+	}
   
   @keyframes rotation {
 	from {

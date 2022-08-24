@@ -31,7 +31,7 @@ const LogIn : React.FC = () => {
         <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
                   <TextField id="outlined-basic" name="username" label="Username or email"  variant="outlined" />
                   <div className="">
-                    <TextField type="password" className="" id="user-password"  label="password" variant="outlined" />
+                    <TextField type="password" className="" id="user-password"  label="Password" variant="outlined" />
                     {showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword}/> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword}/>}
                   </div>
                   <div className=" grid">

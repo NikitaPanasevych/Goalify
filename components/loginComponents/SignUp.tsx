@@ -25,7 +25,8 @@ const SignUp : React.FC = () => {
             !showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
           }
     
-        return(<motion.div
+        return(
+          <motion.div
             initial={{ opacity: 0,  y:-20 }}
             animate={{ opacity: 1,  y:0 }}
             exit={{ y:-50}}
@@ -33,11 +34,11 @@ const SignUp : React.FC = () => {
               duration: 0.5,
               delay: 0.2,
             }}
-            >
+          >
         <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
                   <TextField id="outlined-basic" name="username" label="Username or email" onChange={handleChange} value={user.username} variant="outlined" />
                   <div className="">
-                    <TextField type="password" className="" id="user-password" onChange={handleChange} label="password" variant="outlined" />
+                    <TextField type="password" className="" id="user-password" onChange={handleChange} label="Password" variant="outlined" />
                     {showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword}/> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword}/>}
                   </div>
                   <div className=" grid">

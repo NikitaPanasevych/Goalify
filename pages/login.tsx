@@ -12,8 +12,8 @@ import { collection, addDoc, getFirestore, getDocs } from 'firebase/firestore';
 import { Opacity, Translate } from "@mui/icons-material";
 
 export interface IUser {
-  email: string,
-  username: string,
+  email?: string,
+  username?: string,
   password: string,
 }
 

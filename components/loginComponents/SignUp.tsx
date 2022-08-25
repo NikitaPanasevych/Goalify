@@ -53,7 +53,7 @@ const SignUp: React.FC<ISignup> = (props) => {
         <TextField className="m-1 w-[15em]" id="outlined-basic" name="username" label="Username" onChange={handleChange} value={user.username} variant="outlined" />
         <TextField className="m-1 w-[15em]" id="outlined-basic" name="email" label="Email" onChange={handleChange} value={user.email} variant="outlined" />
         <div className="m-1 w-[15em]">
-          <TextField className="w-[15em]" type="password" id="user-password" onChange={handleChange} label="Password" variant="outlined" />
+          <TextField className="w-[15em]" type="password" name="password" id="user-password" onChange={handleChange} label="Password" variant="outlined" />
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">

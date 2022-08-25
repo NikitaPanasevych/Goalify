@@ -1,6 +1,6 @@
 import { NextPage } from "next"
-import Guest from "./guest";
-import Dashboard from "./home";
+import Home from "./home";
+import Dashboard from "./Dashboard";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
@@ -24,7 +24,7 @@ const Homepage : NextPage = () => {
 
         <div className="">
             <title>Vision</title>
-            {isRegistered ? <Dashboard /> : <Guest />}
+            {isRegistered ? <Dashboard /> : <Home />}
         </div>
 
         

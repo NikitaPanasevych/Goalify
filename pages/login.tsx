@@ -12,8 +12,8 @@ import { collection, addDoc, getFirestore, getDocs } from 'firebase/firestore';
 import { Opacity, Translate } from "@mui/icons-material";
 
 export interface IUser {
-  email?: string,
-  username?: string,
+  email: string,
+  username: string,
   password: string,
 }
 
@@ -54,7 +54,7 @@ const Login: NextPage = () => {
         <div className=" grid">
           <h1><a href='/guest'>Vision</a></h1>
           <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
-            <Button type="submit" onClick={() => setMode("sign up")}>Sign up</Button>
+            <Button onClick={() => setMode("sign up")}>Sign up</Button>
             <Button onClick={() => setMode("log in")}>Log in</Button>
           </ButtonGroup>
         </div>

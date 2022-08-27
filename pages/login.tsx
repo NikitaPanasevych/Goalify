@@ -12,28 +12,30 @@ import { collection, addDoc, getFirestore, getDocs } from 'firebase/firestore';
 import { Opacity, Translate } from "@mui/icons-material";
 
 export interface IUser {
-  email?: string,
-  username?: string,
-  password: string,
+  email: string;
+  username: string;
+  password: string;
 }
 
-export interface IArg{
-  
-}
+export type IUs = {
+  email: string,
+  username: string,
+  password: string,
+};
 
 const Login: NextPage = () => {
 
   // Variables and hooks
   const [mode, setMode] = useState("sign up");
 
-  const [curUser, setCurUser] = useState({
+  const [curUser, setCurUser] = useState<IUs>({
     email: '',
     username: '',
     password: '',
-  })
+  });
 
-  const updateUserData = (newUser: IUser):void => {
-    setCurUser({...curUser, [newUser.name]: [newUser.value]});
+  const handleUserInfo = (userName: string, userValue: string) => {
+    setCurUser({...curUser, [userName]: [userValue]});
   }
 
 
@@ -54,11 +56,11 @@ const Login: NextPage = () => {
         <div className=" grid">
           <h1><a href='/guest'>Vision</a></h1>
           <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
-            <Button type="submit" onClick={() => setMode("sign up")}>Sign up</Button>
-            <Button onClick={() => setMode("log in")}>Log in</Button>
+            <Button type="submit" onClick={() => {setMode("sign up"); setCurUser({email: '', username: '', password: ''})}}>Sign up</Button>
+            <Button onClick={() => {setMode("log in"); setCurUser({email: '', username: '', password: ''})}}>Log in</Button>
           </ButtonGroup>
         </div>
-        {mode === "sign up" ? <SignUp handleUserData={updateUserData} /> : <LogIn />}
+        {mode === "sign up" ? <SignUp handleUserChange={handleUserInfo} userInfo={curUser} /> : <LogIn handleUserChange={handleUserInfo} userInfo={curUser} />}
       </div>
     </div>
   )

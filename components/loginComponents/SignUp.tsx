@@ -1,28 +1,22 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
-import IUser from '../../pages/login';
+import IUser, {IUs} from '../../pages/login';
 
 interface ISignup {
-  handleUserData(newUser: typeof IUser): void;
+  handleUserChange(userName: string, userValue: string): void;
+  userInfo: IUs;
 }
 
 const SignUp: React.FC<ISignup> = (props) => {
   
-  //Handle user change and hook state
-  const [user, setUser] = useState({
-    email: '',
-    username: '',
-    password: ''
-  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: [e.target.value] });
+    props.handleUserChange(e.target.name,e.target.value);
   }
-
 
   //Handle password visibility
   const [showPass, setPass] = useState(false);
@@ -34,7 +28,7 @@ const SignUp: React.FC<ISignup> = (props) => {
 
 
   const handleSignUp = () => {
-
+    
   }
 
 
@@ -50,10 +44,10 @@ const SignUp: React.FC<ISignup> = (props) => {
       }}
     >
       <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
-        <TextField className="m-1 w-[15em]" id="outlined-basic" name="username" label="Username" onChange={handleChange} value={user.username} variant="outlined" />
-        <TextField className="m-1 w-[15em]" id="outlined-basic" name="email" label="Email" onChange={handleChange} value={user.email} variant="outlined" />
+        <TextField className="m-1 w-[15em]" id="outlined-basic" name="username" label="Username" onChange={handleChange} value={props.userInfo.username} variant="outlined" />
+        <TextField className="m-1 w-[15em]" id="outlined-basic" name="email" label="Email" onChange={handleChange} value={props.userInfo.email} variant="outlined" />
         <div className="m-1 w-[15em]">
-          <TextField className="w-[15em]" type="password" id="user-password" onChange={handleChange} label="Password" variant="outlined" />
+          <TextField className="w-[15em]" type="password" id="user-password" name="password" onChange={handleChange} value={props.userInfo.password} label="Password" variant="outlined" />
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">

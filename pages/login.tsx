@@ -8,14 +8,8 @@ import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
 //firebase
 import { app, database } from "./index";
-import { collection, addDoc, getFirestore, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getFirestore,doc, getDoc, getDocs, Timestamp } from 'firebase/firestore';
 import { Opacity, Translate } from "@mui/icons-material";
-
-export interface IUser {
-  email: string;
-  username: string;
-  password: string;
-}
 
 export type IUs = {
   email: string,
@@ -33,11 +27,9 @@ const Login: NextPage = () => {
     username: '',
     password: '',
   });
-
   const handleUserInfo = (userName: string, userValue: string) => {
     setCurUser({...curUser, [userName]: [userValue]});
   }
-
 
   // Database Connection
   const userCollection = collection(database, 'users');
@@ -46,6 +38,17 @@ const Login: NextPage = () => {
       const data = await getDocs(userCollection);
     }
   }, [])
+
+  //Database interaction - Adding new users
+  const handleSignUp = async () => { 
+      const docRef = await addDoc(collection(database, 'users'), {
+        curUser,
+        created: Timestamp.now()
+      })
+      console.log(docRef);
+  }
+
+
   // New branch login-test created
 
   return (
@@ -60,7 +63,7 @@ const Login: NextPage = () => {
             <Button onClick={() => {setMode("log in"); setCurUser({email: '', username: '', password: ''})}}>Log in</Button>
           </ButtonGroup>
         </div>
-        {mode === "sign up" ? <SignUp handleUserChange={handleUserInfo} userInfo={curUser} /> : <LogIn handleUserChange={handleUserInfo} userInfo={curUser} />}
+        {mode === "sign up" ? <SignUp handleUserChange={handleUserInfo} userInfo={curUser} handleClick={handleSignUp} /> : <LogIn handleUserChange={handleUserInfo} userInfo={curUser} />}
       </div>
     </div>
   )

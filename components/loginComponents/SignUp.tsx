@@ -4,11 +4,12 @@ import { TextField } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
-import IUser, {IUs} from '../../pages/login';
+import  {IUs} from '../../pages/login';
 
 interface ISignup {
   handleUserChange(userName: string, userValue: string): void;
   userInfo: IUs;
+  handleClick: any;
 }
 
 const SignUp: React.FC<ISignup> = (props) => {
@@ -24,11 +25,6 @@ const SignUp: React.FC<ISignup> = (props) => {
     setPass(!showPass);
     const password = document.getElementById('user-password');
     !showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
-  }
-
-
-  const handleSignUp = () => {
-    
   }
 
 
@@ -51,7 +47,7 @@ const SignUp: React.FC<ISignup> = (props) => {
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">
-          <Button className=" w-40 m-auto mt-5" variant="outlined" onClick={handleSignUp}>Sign Up</Button>
+          <Button className=" w-40 m-auto mt-5" variant="outlined"  onClick={props.handleClick} >Sign Up</Button>
         </div>
         <a href="" className=" mt-5">Forgot your password?</a>
         <hr className="text-black" />

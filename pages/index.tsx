@@ -1,19 +1,6 @@
 import { NextPage } from "next"
 import Guest from "./guest";
 import Dashboard from "./home";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-export const app = initializeApp({
-    apiKey: process.env.REACT_APP_apiKey,
-    authDomain: process.env.REACT_APP_authDomain,
-    databaseURL: process.env.REACT_APP_databaseURL,
-    projectId: process.env.REACT_APP_projectId,
-    storageBucket: process.env.REACT_APP_storageBucket,
-    messagingSenderId: process.env.REACT_APP_messagingSenderId,
-    appId: process.env.REACT_APP_appId,
-});
-export const database = getFirestore(app);
 
 const Homepage : NextPage = () => {
 

@@ -1,14 +1,17 @@
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 //Components
 import SignUp from "../components/loginComponents/SignUp";
 import LogIn from "../components/loginComponents/LogIn";
 import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
+
 //firebase
-import { app, database } from "./index";
-import { collection, addDoc, getFirestore,doc, getDoc, getDocs, Timestamp } from 'firebase/firestore';
+import { app, database } from "../firebase_config";
+import { collection, addDoc, getDocs, Timestamp } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth'
 import { Opacity, Translate } from "@mui/icons-material";
 
 export type IUs = {
@@ -20,7 +23,7 @@ export type IUs = {
 const Login: NextPage = () => {
 
   // Variables and hooks
-  const [mode, setMode] = useState("sign up");
+  const [mode, setMode] = useState("signup");
 
   const [curUser, setCurUser] = useState<IUs>({
     email: '',
@@ -32,23 +35,23 @@ const Login: NextPage = () => {
   }
 
   // Database Connection
-  const userCollection = collection(database, 'users');
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(userCollection);
-    }
-  }, [])
+  const userRef = collection(database, 'users');
 
   //Database interaction - Adding new users
-  const handleSignUp = async () => { 
-      const docRef = await addDoc(collection(database, 'users'), {
-        curUser,
-        created: Timestamp.now()
+  const handleSignUp = () => { 
+      addDoc(userRef, curUser)
+      .catch((err) => {
+        console.error(err);
       })
-      console.log(docRef);
   }
 
-
+  const clearUser = () => {
+    setCurUser({
+      username: '',
+      email: '',
+      password: ''
+    });
+  }
   // New branch login-test created
 
   return (
@@ -59,11 +62,11 @@ const Login: NextPage = () => {
         <div className=" grid">
           <h1><a href='/guest'>Vision</a></h1>
           <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
-            <Button type="submit" onClick={() => {setMode("sign up"); setCurUser({email: '', username: '', password: ''})}}>Sign up</Button>
-            <Button onClick={() => {setMode("log in"); setCurUser({email: '', username: '', password: ''})}}>Log in</Button>
+            {mode === 'signup' ?  <Button disabled>Sign up</Button> : <Button name="signup" onClick={() => {setMode("signup"); clearUser()}}>Sign up</Button>}
+            {mode === "login" ? <Button disabled>Log In</Button> : <Button name="login" onClick={() => {setMode("login"); clearUser()}}>Log in</Button>}
           </ButtonGroup>
         </div>
-        {mode === "sign up" ? <SignUp handleUserChange={handleUserInfo} userInfo={curUser} handleClick={handleSignUp} /> : <LogIn handleUserChange={handleUserInfo} userInfo={curUser} />}
+        {mode === "signup" ? <SignUp handleUserChange={handleUserInfo} userInfo={curUser} handleClick={handleSignUp} /> : <LogIn handleUserChange={handleUserInfo} userInfo={curUser} />}
       </div>
     </div>
   )
@@ -71,3 +74,7 @@ const Login: NextPage = () => {
 
 
 export default Login;
+
+function e(e: any) {
+  throw new Error("Function not implemented.");
+}

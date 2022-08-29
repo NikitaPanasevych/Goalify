@@ -1,33 +1,36 @@
+/* Notes for future development
+ - Add a loading circle when login button pressed to avoid long wait times with no changes, and to account for time needed to reroute
+ - 
+*/
+
 import React, { useState } from "react";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
-import {IUs} from '../../pages/login';
+
+
 
 interface ILogin {
-  handleUserChange(userName: string, userValue: string): void;
-  userInfo: IUs;
+  handleClick(userEmail: string, userPassword: string): void;
 }
 
 const LogIn: React.FC<ILogin> = (props) => {
 
-  //Handle the visibility of password
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [userPassword, setUserPass] = useState<string>('');
+
+  //Handle global user hook for user log in data
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.name === "email" ? setUserEmail(e.target.value) : setUserPass(e.target.value);
+  }
+//Password visiblity function
   const [showPass, setPass] = useState(false);
   const showPassword = () => {
     setPass(!showPass);
     const password = document.getElementById('user-password');
     !showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
-  }
-
-  //Handle global user hook for user log in data
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.handleUserChange(e.target.name, e.target.value);
-  }
-
-  const handleLogIn = () => {
-
   }
 
   return (
@@ -41,13 +44,13 @@ const LogIn: React.FC<ILogin> = (props) => {
       }}
     >
       <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
-        <TextField className="w-[15em]" id="outlined-basic" name="username" label="Username" onChange={handleChange} value={props.userInfo.username} variant="outlined" />
+        <TextField className="w-[15em]" id="outlined-basic" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" />
         <div className="w-[15em]">
-          <TextField type="password" className="w-[15em]" name="password" id="user-password" label="Password" onChange={handleChange} value={props.userInfo.password} variant="outlined" />
+          <TextField type="password" className="w-[15em]" name="password" id="user-password" label="Password" onChange={handleChange} value={userPassword} variant="outlined" />
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">
-          <Button className=" w-40 m-auto mt-5" variant="outlined" onClick={handleLogIn}>Log In</Button>
+          <Button className=" w-40 m-auto mt-5" variant="outlined" onClick={() => props.handleClick(userEmail, userPassword)}>Log In</Button>
         </div>
         <a href="" className=" mt-5">Forgot your password?</a>
         <hr className="text-black" />

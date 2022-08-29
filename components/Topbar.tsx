@@ -1,8 +1,11 @@
 const Topbar : React.FC = () => {
     return(
-        <div className=" absolute top-0 w-screen bg-black h-20 left-[-15px]">
-            
-        </div>
+        <nav id="nav-1">
+            <a className="link-1" href="#">Home</a>
+            <a className="link-1" href="#">About</a>
+            <a className="link-1" href="#">Contact</a>
+            <a className="link-1" href="#">Shop</a>
+        </nav>
     )
 }
 

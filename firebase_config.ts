@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, setDoc, Timestamp, doc } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
+import { getFirestore, setDoc, Timestamp, doc, collection, where, query, getDocs, addDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, getAuth, updateProfile, GoogleAuthProvider, GithubAuthProvider, signInWithRedirect, getRedirectResult, signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth'
 import Router from 'next/router'
+import { useReducer } from "react";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_apiKey,
@@ -37,11 +38,44 @@ export const handleSignUp = (userEmail: string, userPassword: string, userUserNa
   });
   Router.push('/dashboard');
 }
-
-const addUserToCollection = async (userID: string, userUserName: string, authProvided: string) => {
+const addUserToCollection = async (userID: string, userUserName: string | null, authProvided: string) => {
   await setDoc(doc(database,'users', userID), {
     username: userUserName,
     dateCreated: Timestamp.now(),
     authProvider: authProvided,
   });
 }
+
+
+//Handle sign in with Google
+export const continueGoogleAuth = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const q = query(collection(database, 'users'), where('uid', '==', user.uid))
+    const data = await getDocs(q);
+    if(data.docs.length === 0) {
+      addUserToCollection(user.uid, user.displayName, 'google');
+    };
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export const signInWithEmail = async (userEmail: string, userPassword: string) => {
+  try{
+    const result = await signInWithEmailAndPassword(auth, userEmail, userPassword);
+    const user = result.user;
+    user ? Router.push('/dashboard') : null;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export const logOut = () => {
+  signOut(auth);
+  Router.push('/');
+  console.log("Log out complete!");
+}
+

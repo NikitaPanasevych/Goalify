@@ -10,6 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
 
+import { signInWithEmail } from "../../firebase_config";
 
 const LogIn: React.FC = () => {
 
@@ -45,7 +46,7 @@ const LogIn: React.FC = () => {
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">
-          <Button className=" w-40 m-auto mt-5" variant="outlined">Log In</Button>
+          <Button className=" w-40 m-auto mt-5" variant="outlined" onClick={() => signInWithEmail(userEmail, userPassword)}>Log In</Button>
         </div>
         <a href="" className=" mt-5">Forgot your password?</a>
         <hr className="text-black" />

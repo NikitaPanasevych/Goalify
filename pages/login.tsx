@@ -15,10 +15,6 @@ import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
 
 //firebase
-import { app, database, auth } from "../firebase_config";
-import { collection, doc, setDoc, getDocs, Timestamp } from 'firebase/firestore';
-import {getDatabase, ref, set} from "firebase/database";
-import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { Opacity, Translate } from "@mui/icons-material";
 
 export let userID: string = '';

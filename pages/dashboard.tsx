@@ -23,7 +23,7 @@ const Dashboard: NextPage = () => {
     useEffect(() => {
         if(loading) return;
         if(!user) Router.push('/');
-        else Router.push('/dashboard');
+        if(user) Router.push('/dashboard');
         fetchUserData();
     }, [loading, user])
 

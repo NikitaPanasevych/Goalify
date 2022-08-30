@@ -5,7 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
 
-import {handleSignUp} from '../../firebase_config'
+import {handleSignUp, continueGoogleAuth} from '../../firebase_config'
 
 
 const SignUp: React.FC = () => {
@@ -51,6 +51,7 @@ const SignUp: React.FC = () => {
         </div>
         <a href="" className=" mt-5">Forgot your password?</a>
         <hr className="text-black" />
+        <button type="button" className="login-with-google-btn" onClick={() => continueGoogleAuth()} >Sign in with Google</button>
       </div>
     </motion.div>
   )

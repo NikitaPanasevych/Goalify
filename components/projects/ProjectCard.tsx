@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 
 interface IProjectCard{
-    projectTitle?: any,
-    projectDesc?: any,
-    projectProgress?: any ,
+    projectTitle?: string,
+    projectDesc?: string
 }
 
 const ProjectCard : React.FC<IProjectCard> = (props) => {
@@ -16,8 +15,8 @@ const ProjectCard : React.FC<IProjectCard> = (props) => {
             <div className=" absolute translate-x-44 w-14 h-14 bg-red-600 rounded-md"></div>
             <h1 className=" text-xl">{props.projectTitle}</h1>
             <div className=" text-[#B4A5A5] w-40  break-words">{props.projectDesc}</div>
-            <progress className=" mt-2" value={props.projectProgress} max="20"></progress>
-            <h3 className=" text-white">{props.projectProgress}/20 Tasks</h3> 
+            <progress className=" mt-2" value="10" max="20"></progress>
+            <h3 className=" text-white">10/20 Tasks</h3> 
         </div>
         </motion.div>
     )

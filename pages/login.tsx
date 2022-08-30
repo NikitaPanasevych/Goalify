@@ -1,49 +1,53 @@
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Router from 'next/router';
+
 //Components
 import SignUp from "../components/loginComponents/SignUp";
 import LogIn from "../components/loginComponents/LogIn";
 import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
+
 //firebase
-import { app, database } from "./index";
-import { collection, addDoc, getFirestore, getDocs } from 'firebase/firestore';
+import { app, database, auth } from "../firebase_config";
+import { collection, doc, setDoc, getDocs, Timestamp } from 'firebase/firestore';
+import {getDatabase, ref, set} from "firebase/database";
+import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { Opacity, Translate } from "@mui/icons-material";
 
-export interface IUser {
-  email?: string,
-  username?: string,
-  password: string,
-}
 
-export interface IArg{
-  
-}
 
 const Login: NextPage = () => {
 
   // Variables and hooks
-  const [mode, setMode] = useState("sign up");
+  const [mode, setMode] = useState<string>("signup");
 
-  const [curUser, setCurUser] = useState({
-    email: '',
-    username: '',
-    password: '',
-  })
+  //Database interaction - Adding new users
+  const handleSignUp = (userEmail: string, userPassword: string, userUserName: string) => {
 
-  const updateUserData = (newUser: IUser):void => {
-    setCurUser({...curUser, [newUser.name]: [newUser.value]});
+    //Authentication of users with Email and Passoword
+    createUserWithEmailAndPassword(auth, userEmail, userPassword )
+    .then((UserCredential) => {
+      console.log('Successfully added a new user');
+      const user = UserCredential.user;
+      updateProfile(user, {displayName: userUserName});
+      console.log(user.displayName);
+    })
+    .catch((error) => {
+      console.log(error.code);
+    });
+
+
+    //Adding users information to database
+    
+    // Router.push('/');
   }
 
+  // Handle Login check
+  const handleLogin = () => {
 
-  // Database Connection
-  const userCollection = collection(database, 'users');
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(userCollection);
-    }
-  }, [])
+   }
   // New branch login-test created
 
   return (
@@ -54,11 +58,11 @@ const Login: NextPage = () => {
         <div className=" grid">
           <h1><a href='/guest'>Vision</a></h1>
           <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
-            <Button onClick={() => setMode("sign up")}>Sign up</Button>
-            <Button onClick={() => setMode("log in")}>Log in</Button>
+            {mode === 'signup' ?  <Button disabled>Sign up</Button> : <Button name="signup" onClick={() => {setMode("signup")}}>Sign up</Button>}
+            {mode === "login" ? <Button disabled>Log In</Button> : <Button name="login" onClick={() => {setMode("login")}}>Log in</Button>}
           </ButtonGroup>
         </div>
-        {mode === "sign up" ? <SignUp handleUserData={updateUserData} /> : <LogIn />}
+        {mode === "signup" ? <SignUp handleClick={handleSignUp} /> : <LogIn handleClick={handleLogin} />}
       </div>
     </div>
   )

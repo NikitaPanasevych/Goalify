@@ -14,7 +14,7 @@ interface IProjects{
 interface IProjectData {
     title: string,
     description: string,
-    progress: number | null
+    progress: number | undefined
 }
 
 const AddProject : React.FC<IProjects> = (props) => {
@@ -23,7 +23,7 @@ const AddProject : React.FC<IProjects> = (props) => {
     const [projectData, setProjectData] = useState<IProjectData>({
         title: '',
         description: '',
-        progress: null,
+        progress: undefined,
     })
 
     const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +45,7 @@ const AddProject : React.FC<IProjects> = (props) => {
                 <TextField type="number" className=" pt-5" id="outlined-basic" onChange={handleData} name="progress" value={projectData.progress} label="Progress(requires number)" variant="outlined" />
                 <Button onClick={saveProject} variant="outlined">Save Project</Button>
                 </div>
-                <IconButton  size="large" onClick={() => props.onClose} className=" absolute translate-x-72 -translate-y-12">
+                <IconButton  size="large" onClick={props.onClose} className=" absolute translate-x-72 -translate-y-12">
                     <CloseIcon></CloseIcon>
                 </IconButton>
             </div>

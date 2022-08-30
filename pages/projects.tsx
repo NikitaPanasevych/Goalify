@@ -14,6 +14,7 @@ import {getDocs, collection} from "firebase/firestore";
 const Projects : NextPage = () => {
 
     const [createMode, setCreateMode] = useState(false);
+    const [projectVisibility, setProjectVisiblity] = useState(false);
     const [loadState, setLoad] = useState(false);
     let projectsData: {
         id: string,
@@ -35,6 +36,8 @@ const Projects : NextPage = () => {
         setLoad(true);
     };
     getProjectsData();
+
+    console.log("refreshed");
     return (
         <>
         <Topbar />
@@ -42,7 +45,8 @@ const Projects : NextPage = () => {
             <div className=" absolute  flex flex-wrap pt-28  pl-32  bg-gradient-to-tr from-[#354259] to-[#3F1C1C]">
                 <>
                 <h1 className=" absolute -translate-y-16 text-4xl text-white">Projects</h1>
-                {loadState ? console.log(projectsData) : null}
+                {/* {loadState ? console.log(projectsData) : null} */}
+
                 {/* projectsData.forEach does not display every document tho it is already in the array and should be visible */}
                 {loadState ? projectsData.forEach(doc => {
                     <ProjectCard projectTitle={doc.title} projectDesc={doc.description} projectProgress={doc.progress} />
@@ -65,11 +69,11 @@ const Projects : NextPage = () => {
             }}
             >
                 <AddProject
-                onClose = {() => setCreateMode(false)}
+                onClose = {() =>setCreateMode(false)}
                 />
             </motion.div>
-            :
-            <></>}
+            : 
+            null}
         </div>
         </>
     )

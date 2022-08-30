@@ -111,3 +111,109 @@ html{
   .Bg {
 	background-image: radial-gradient(#3D0000 40%, #000000 60%);
   }
+
+/**/
+
+.svg-wrapper {
+	height: 60px;
+	  margin: 0 auto;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 320px;
+  }
+  
+  .shape {
+	fill: transparent;
+	stroke-dasharray: 140 540;
+	stroke-dashoffset: -474;
+	stroke-width: 8px;
+	stroke: #19f6e8;
+  }
+  
+  .text {
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-size: 22px;
+	letter-spacing: 8px;
+	line-height: 32px;
+	position: relative;
+	top: -48px;
+  }
+  
+  @keyframes draw {
+	0% {
+	  stroke-dasharray: 140 540;
+	  stroke-dashoffset: -474;
+	  stroke-width: 8px;
+	}
+	100% {
+	  stroke-dasharray: 760;
+	  stroke-dashoffset: 0;
+	  stroke-width: 2px;
+	}
+  }
+  
+  .svg-wrapper:hover .shape {
+	-webkit-animation: 0.5s draw linear forwards;
+	animation: 0.5s draw linear forwards;
+  }
+
+
+/* Topbar */
+
+nav {
+	padding: 24px;
+	text-align: center;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  #nav-1 {
+	background: #000000;
+  }
+  
+  
+  .link-1 {
+	transition: 0.3s ease;
+	background: #000000;
+	color: #ffffff;
+	font-size: 20px;
+	text-decoration: none;
+	border-top: 4px solid #000000;
+	border-bottom: 4px solid #000000;
+	padding: 20px 0;
+	margin: 0 20px;
+  }
+  .link-1:hover {
+	border-top: 4px solid #ffffff;
+	border-bottom: 4px solid #ffffff;
+	padding: 6px 0; 
+  }
+  
+  .link-2 {
+	transition: 0.6s;
+	color: #ffffff;
+	font-size: 20px;
+	text-decoration: none;
+	border-right: 2px dotted transparent;
+	padding: 30px 8px 0 10px;
+	margin: 0 10px;
+  }
+  .link-2:hover {
+	border-right: 2px dotted #ffffff;
+	padding-bottom: 24px;
+  }
+  .link-3 {
+	transition: 0.4s;
+	color: #ffffff;
+	font-size: 20px;
+	text-decoration: none;
+	padding: 0 10px;
+	margin: 0 10px;
+  }
+  .link-3:hover {
+	background-color: #ffffff;
+	color: #EEA200;
+	padding: 24px 10px;
+  }
+
+  

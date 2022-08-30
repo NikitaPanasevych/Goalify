@@ -11,12 +11,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
 
 
-
-interface ILogin {
-  handleClick(userEmail: string, userPassword: string): void;
-}
-
-const LogIn: React.FC<ILogin> = (props) => {
+const LogIn: React.FC = () => {
 
   const [userEmail, setUserEmail] = useState<string>('');
   const [userPassword, setUserPass] = useState<string>('');
@@ -44,13 +39,13 @@ const LogIn: React.FC<ILogin> = (props) => {
       }}
     >
       <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
-        <TextField className="w-[15em]" id="outlined-basic" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" />
+        <TextField className="w-[15em]" id="userEmail" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" />
         <div className="w-[15em]">
           <TextField type="password" className="w-[15em]" name="password" id="user-password" label="Password" onChange={handleChange} value={userPassword} variant="outlined" />
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">
-          <Button className=" w-40 m-auto mt-5" variant="outlined" onClick={() => props.handleClick(userEmail, userPassword)}>Log In</Button>
+          <Button className=" w-40 m-auto mt-5" variant="outlined">Log In</Button>
         </div>
         <a href="" className=" mt-5">Forgot your password?</a>
         <hr className="text-black" />

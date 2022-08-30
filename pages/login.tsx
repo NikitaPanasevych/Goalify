@@ -1,3 +1,8 @@
+/* Suggestions for future:
+ - Add an error message alert and css to show that input is wrong
+*/
+
+
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useEffect, useState } from 'react';
@@ -16,6 +21,7 @@ import {getDatabase, ref, set} from "firebase/database";
 import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { Opacity, Translate } from "@mui/icons-material";
 
+export let userID: string = '';
 
 
 const Login: NextPage = () => {
@@ -23,31 +29,6 @@ const Login: NextPage = () => {
   // Variables and hooks
   const [mode, setMode] = useState<string>("signup");
 
-  //Database interaction - Adding new users
-  const handleSignUp = (userEmail: string, userPassword: string, userUserName: string) => {
-
-    //Authentication of users with Email and Passoword
-    createUserWithEmailAndPassword(auth, userEmail, userPassword )
-    .then((UserCredential) => {
-      console.log('Successfully added a new user');
-      const user = UserCredential.user;
-      updateProfile(user, {displayName: userUserName});
-      console.log(user.displayName);
-    })
-    .catch((error) => {
-      console.log(error.code);
-    });
-
-
-    //Adding users information to database
-    
-    // Router.push('/');
-  }
-
-  // Handle Login check
-  const handleLogin = () => {
-
-   }
   // New branch login-test created
 
   return (
@@ -62,7 +43,7 @@ const Login: NextPage = () => {
             {mode === "login" ? <Button disabled>Log In</Button> : <Button name="login" onClick={() => {setMode("login")}}>Log in</Button>}
           </ButtonGroup>
         </div>
-        {mode === "signup" ? <SignUp handleClick={handleSignUp} /> : <LogIn handleClick={handleLogin} />}
+        {mode === "signup" ? <SignUp /> : <LogIn />}
       </div>
     </div>
   )

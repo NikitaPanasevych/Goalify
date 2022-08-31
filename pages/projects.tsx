@@ -1,6 +1,7 @@
 import { NextPage } from "next"
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Router from 'next';
 //Components
 import ProjectCard from "../components/projects/ProjectCard";
 import Topbar from "../components/Topbar";
@@ -17,20 +18,17 @@ const Projects : NextPage = () => {
 
     const [createMode, setCreateMode] = useState(false);
     const [user, loading, error] = useAuthState(auth);
-    const transition : any = user?.uid;
-    const UID : string = transition
-    const db : CollectionReference<DocumentData> = collection(database, "users", UID, "projects" )
     const [projectData, setProjectData] = useState([{}])
 
     useEffect(() => {
-        getDocs(db)
+        if(loading) {console.log('loading');return;}
+        if(user) getDocs(collection(database, "users", user?.uid, "projects" ))
             .then((data : QuerySnapshot) => {
                 setProjectData(data.docs.map((item: QueryDocumentSnapshot) => {
                     return { ...item.data(), id: item.id }
                 }));
             })
-    }, [projectData])
-    console.log(projectData)
+    }, [projectData, user, loading])
 
     return (
         <>

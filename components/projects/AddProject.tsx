@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 
-
 interface IProjects{
     onClose: () => void;
 }
@@ -37,6 +36,7 @@ const AddProject : React.FC<IProjects> = (props) => {
     const saveProject = async () => {
         await addDoc(db, projectData );
         alert("success");
+        
     }
 
     return(
@@ -46,7 +46,7 @@ const AddProject : React.FC<IProjects> = (props) => {
                 <div className=" grid w-[50%] h-[50%] m-auto mt-5">
                 <TextField className=" pt-5" id="outlined-basic" onChange={handleData} name="title" value={projectData.title} label="Project title" variant="outlined" />
                 <TextField className=" pt-5" id="outlined-basic" onChange={handleData} name="description" value={projectData.description} label="Project description" variant="outlined" />
-                <Button onClick={saveProject} variant="outlined">Save Project</Button>
+                <Button onClick={() => {saveProject(),props.onClose();}} variant="outlined">Save Project</Button>
                 </div>
                 <IconButton  size="large" onClick={props.onClose} className=" absolute translate-x-72 -translate-y-12">
                     <CloseIcon></CloseIcon>

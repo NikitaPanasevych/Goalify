@@ -34,9 +34,8 @@ const Homepage : NextPage = () => {
 
     useEffect(() => {
         if(loading) {console.log("Loading page"); return;};
-        if(!user) {Router.push('/');}
-        else Router.push('/dashboard');
-    }, [loading, user]);
+        user ? Router.push('/dashboard') : Router.push('/');
+    }, [user, loading]);
 
     return(
         <div className=" Bg h-screen grid">

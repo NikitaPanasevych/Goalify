@@ -8,26 +8,29 @@ import AddProject from "../components/projects/AddProject";
 //MUI
 import AddIcon from '@mui/icons-material/Add';
 //Firebase
-import {database, app} from '../firebase_config';
-import {getDocs, collection} from "firebase/firestore";
+import { auth } from "../firebase_config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {database} from '../firebase_config';
+import {getDocs, collection, CollectionReference,  QuerySnapshot, QueryDocumentSnapshot, DocumentData} from "firebase/firestore";
 
 const Projects : NextPage = () => {
 
     const [createMode, setCreateMode] = useState(false);
-    
-    const db = collection(database, "projects" )
+    const [user, loading, error] = useAuthState(auth);
+    const transition : any = user?.uid;
+    const UID : string = transition
+    const db : CollectionReference<DocumentData> = collection(database, "users", UID, "projects" )
     const [projectData, setProjectData] = useState([{}])
 
     useEffect(() => {
         getDocs(db)
-            .then((data) => {
-                setProjectData(data.docs.map((item) => {
+            .then((data : QuerySnapshot) => {
+                setProjectData(data.docs.map((item: QueryDocumentSnapshot) => {
                     return { ...item.data(), id: item.id }
                 }));
             })
     }, [projectData])
     console.log(projectData)
-
 
     return (
         <>

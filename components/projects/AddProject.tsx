@@ -3,9 +3,12 @@ import {TextField} from "@mui/material";
 import { IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 //firebase
-import { app, database} from "../../firebase_config"
-import { collection, addDoc, getFirestore } from 'firebase/firestore'
+import { auth, database} from "../../firebase_config"
+import { collection, addDoc, CollectionReference, DocumentData } from 'firebase/firestore'
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+
 
 interface IProjects{
     onClose: () => void;
@@ -18,7 +21,10 @@ interface IProjectData {
 
 const AddProject : React.FC<IProjects> = (props) => {
 
-
+    const [user, loading, error] = useAuthState(auth);
+    const transition : any = user?.uid;
+    const UID : string = transition
+    const db : CollectionReference<DocumentData> = collection(database, "users", UID, "projects" )
     const [projectData, setProjectData] = useState<IProjectData>({
         title: '',
         description: ''
@@ -29,8 +35,8 @@ const AddProject : React.FC<IProjects> = (props) => {
     }
 
     const saveProject = async () => {
-        await addDoc(collection(database, "projects" ), projectData );
-        alert("Added a new project to \"projects\" collection");
+        await addDoc(db, projectData );
+        alert("success");
     }
 
     return(

@@ -1,6 +1,7 @@
 import { logOut } from "../firebase_config"
 import Logo from "./Homepage/GuestComponents/logo"
 import { Avatar } from "@mui/material"
+import Link from "next/link"
 
 const Topbar : React.FC = () => {
 
@@ -28,10 +29,10 @@ const Topbar : React.FC = () => {
             <path d="M603.96 261.604L416.832 380.416L630.693 312.099L638.861 306.158L644.059 298.733L646.287 286.851L644.059 276.455L638.861 267.544L630.693 261.604L620.297 257.891H612.129L603.96 261.604Z" fill="#FF0000" stroke="#FF0000"/>
         </svg>
             </div>
-            <a className="link-1" href="/dashboard">Home</a>
-            <a className="link-1" href="/tasks">Tasks</a>
-            <a className="link-1" href="/projects">Projects</a>
-            <a className="link-1" href="/goals">Goals</a>
+            <Link href="/dashboard"><a className="link-1">Home</a></Link>
+            <Link href="/tasks"><a className="link-1">Tasks</a></Link>
+            <Link href="/projects"><a className="link-1">Projects</a></Link>
+            <Link href="/goals"><a className="link-1">Goals</a></Link>
             <a className="link-1 cursor-pointer" onClick={() => logOut()}>Log Out</a>
             <div className=" absolute right-3 top-4">
                 <Avatar>N</Avatar>

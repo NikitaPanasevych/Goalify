@@ -35,6 +35,7 @@ export const handleSignUp = (userEmail: string, userPassword: string, userUserNa
   })
   .catch((error) => {
     console.log(error.code);
+    alert(error.message);
   });
   Router.push('/dashboard');
 }
@@ -48,19 +49,26 @@ const addUserToCollection = async (userID: string, userUserName: string | null, 
 
 
 //Handle sign in with Google
-export const continueGoogleAuth = async () => {
+export const continueWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    const q = query(collection(database, 'users'), where('uid', '==', user.uid))
-    const data = await getDocs(q);
-    if(data.docs.length === 0) {
-      addUserToCollection(user.uid, user.displayName, 'google');
-    };
-  } catch(error) {
-    console.log(error);
-  }
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    console.log(result.user);
+  })
+  .catch((error) => {
+    console.log(error.code, "==>" ,error.message);
+  })
+}
+
+export const continueWithGithub = async () => {
+  const provider = new GithubAuthProvider();
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    console.log(result.user);
+  })
+  .catch((error) => {
+    console.log(error.code, "==>" ,error.message)
+  })
 }
 
 export const signInWithEmail = async (userEmail: string, userPassword: string) => {

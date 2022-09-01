@@ -46,12 +46,12 @@ const Homepage : NextPage = () => {
                     <a className=" text-3xl m-10 cursor-pointer">Home</a>
                     <a className=" text-3xl m-10 cursor-pointer">About</a>
                     <a className=" text-3xl m-10 mr-[25%] cursor-pointer">Contact us</a>
-                    <Button href="/login" className=" absolute right-10" variant="text">Let's begin<KeyboardArrowRightOutlinedIcon/></Button>
+                    <Button href="/login" className="absolute right-10" variant="text">Let&apos;s begin<KeyboardArrowRightOutlinedIcon/></Button>
                 </div>
 
                 <div className="flex mt-16 ml-10">
                     <div className=" mr-64 ml-20 ">
-                        <h1 className=" text-center text-7xl">Let's start something <strong>Big</strong></h1>
+                        <h1 className=" text-center text-7xl">Let&apos;s start something <strong>Big</strong></h1>
                         <h2 className=" text-7xl">with <strong>Us</strong></h2>
                         <Logo />
 
@@ -79,7 +79,7 @@ const Homepage : NextPage = () => {
                                 Delegate to smaller pieces - <strong className=" text-blue-400">Projects</strong>
                                 </div>
                                 <div className=" text-[#A4A4A4] mt-4"> 
-                                Rome wasn't built in a day.
+                                Rome wasn&apos;t built in a day.
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@ const Homepage : NextPage = () => {
                                 Comlete <strong className=" text-purple-400">Tasks</strong>
                                 </div>
                                 <div className=" text-[#A4A4A4] mt-4"> 
-                                With consistency and reps and routine you're going to achieve your goals.
+                                With consistency and reps and routine you&apos;re going to achieve your goals.
                                 </div>
                             </div>
                             

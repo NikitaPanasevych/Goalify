@@ -8,5 +8,4 @@ const Tasks : NextPage = () => {
     )
 }
 
-
 export default Tasks;

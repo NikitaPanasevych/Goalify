@@ -11,19 +11,19 @@ import { database } from "../firebase_config";
 const Dashboard: NextPage = () => {
 
     const [user, loading, error] = useAuthState(auth);
-    const fetchUserData = async () => {
-        try {
-            const q = query(collection(database, 'users'), where('userID', '==', user?.uid))
-        } catch(err) {
-            console.error(err);
-            alert("error occured while fetching data")
-        }
-    }
 
     useEffect(() => {
         if(loading) return;
         if(!user) Router.push('/');
         if(user) Router.push('/dashboard');
+        const fetchUserData = async () => {
+            try {
+                const q = query(collection(database, 'users'), where('userID', '==', user?.uid))
+            } catch(err) {
+                console.error(err);
+                alert("error occured while fetching data")
+            }
+        }
         fetchUserData();
     }, [loading, user])
 

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 interface IProjectCard{
     projectTitle?: string,
     projectDesc?: string
+    
 }
 
 const ProjectCard : React.FC<IProjectCard> = (props) => {

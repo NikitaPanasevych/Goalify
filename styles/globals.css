@@ -248,4 +248,25 @@ nav {
 	padding: 24px 10px;
   }
 
+  /* Scrollbar */
+
+  /* width */
+::-webkit-scrollbar {
+	width: 10px;
+	opacity: 0;
+  }
   
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #000000;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555;
+  }

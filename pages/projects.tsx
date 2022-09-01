@@ -30,6 +30,7 @@ const Projects : NextPage = () => {
             })
     }, [projectData, user, loading])
 
+    //Initial commit for dynamic project routes
     return (
         <>
         <Topbar />

@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { auth } from "../../firebase_config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {database} from '../../firebase_config';
-import {getDocs, collection, CollectionReference,  QuerySnapshot, QueryDocumentSnapshot, DocumentData, Timestamp} from "firebase/firestore";
+import {getDocs, collection, QuerySnapshot, QueryDocumentSnapshot} from "firebase/firestore";
 
 const Projects : NextPage = () => {
 
@@ -32,7 +32,6 @@ const Projects : NextPage = () => {
                 }));
             })
         setAdded(false);
-        console.log(projectData);
     }, [user, loading, isAdded])
 
     //Initial commit for dynamic project routes

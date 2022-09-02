@@ -40,7 +40,7 @@ const Project: React.FC = () => {
     return (
         <>
         <Head>
-            <title>Project Name</title>
+            <title>Project - {projectInfo.title}</title>
         </Head>
         <Topbar />
         <div>

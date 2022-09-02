@@ -7,6 +7,7 @@ import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
+import Head from "next/head";
 
 //Components
 import SignUp from "../components/loginComponents/SignUp";
@@ -30,7 +31,9 @@ const Login: NextPage = () => {
   return (
 
     <div className="flex login-page-Bg h-screen">
-      <title>Login</title>
+      <Head>
+            <title>Login</title>
+        </Head>
       <div className="login-page pt-5 bg-gradient-to-t from-white to-[#FFF89A] rounded-xl">
         <div className=" grid">
           <h1><a href='/guest'>Vision</a></h1>

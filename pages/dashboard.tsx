@@ -5,7 +5,7 @@ import Topbar from "../components/Topbar";
 
 import { auth } from "../firebase_config";
 import { AuthStateHook, useAuthState } from "react-firebase-hooks/auth";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs, where, addDoc} from "firebase/firestore";
 import { database } from "../firebase_config";
 
 const Dashboard: NextPage = () => {

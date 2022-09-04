@@ -69,6 +69,9 @@ const Tasks : NextPage = () => {
                                 {
                                     task_id: 'dfg7df7gd8fg8df8g',
                                     task_text: 'welcome to vision studio'
+                                },
+                                {
+                                    
                                 }
                             ]
                         },

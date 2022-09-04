@@ -38,39 +38,71 @@ const Tasks : NextPage = () => {
         if(user) getDoc(doc(database, 'users', user.uid))
         .then((userData) => {
             const data = userData.data()?.goals;
-            console.log(data);
+            data.map((goal: any) => {
+                // console.log(goal.goal_id)
             })
+            })
+        
 
         // updateUser();
     }, [user, loading]);
 
+    //function to generate unique ids for projects
+    //Specify 'ident' parameter: g - for goals, p - for project, t - tasks
+    const generateUID = (ident?: string) => {
+        const rndNum = Math.floor(Math.random()*(Math.random()*Date.now()));
+        console.log(rndNum);
+        console.log(ident + rndNum.toString(36));
+    }
+    generateUID('g');
+
+    // Array type database
     const updateUser = () => {
         if(user) updateDoc(doc(database, 'users', user?.uid),{
-            goals: {
-                asdfsd7f7asd7fasd6f: {
-                    goal_id: 'asdfsd7f7asd7fasd6f',
+            goals: [
+                {   goal_id: 'asdfsd7f7asd7fasd6f',
                     goal_desc: 'Goal to test a new database',
-                    goal_projects: {
-                        dfg6dfg5d5f6df6g: {
-                            project_id: 'dfg6dfg5d5f6df6g',
+                    projects: [ 
+                        {   project_id: 'dfg6dfg5d5f6df6g',
                             project_desc: 'new project number 1',
-                            project_tasks: {
-                                dfg7df7gd8fg8df8g: {
+                            project_tasks: [
+                                {
                                     task_id: 'dfg7df7gd8fg8df8g',
                                     task_text: 'welcome to vision studio'
                                 }
-                            }
+                            ]
                         },
-                        sdfsd6fs5df6sdf: {
+                        {
                             project_id: 'sdfsd6fs5df6sdf',
                             project_desc: 'New project number 2'
                         }
-                    }
+                    ]
+                },
+                {   goal_id: 'asdasdjkaskjdasd',
+                    goal_desc: 'Goal description',
+                    projects: [
+                        {   project_id: 'dfsd98fsg798s7dfsdf',
+                            project_desc: 'new project number 2',
+                            project_tasks: [
+                                {
+                                    task_id: 'sd4sd4fgh5f6dgh',
+                                    task_text: 'welcome to vlad'
+                                }
+                            ]
+                        },
+                        {
+                            project_id: 'dfgf98g90fghfg',
+                            project_desc: 'New project number 5'
+                        }
+                    ]
                 }
-            }
+            ]
         });
         alert("user updated");
     };
+
+    //Collection type database
+
 
     //Starting the creation of tasks page
     return (

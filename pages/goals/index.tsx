@@ -1,13 +1,13 @@
 import { NextPage } from "next"
-import GoalCard from "../components/goals/goalCard";
-import Topbar from "../components/Topbar";
+import GoalCard from "../../components/goals/goalCard";
+import Topbar from "../../components/Topbar";
 import { useEffect, useState } from "react";
-import AddGoal from "../components/goals/AddGoal";
+import AddGoal from "../../components/goals/AddGoal";
 import { motion } from "framer-motion";
 //Firebase
-import { auth } from "../firebase_config";
+import { auth } from "../../firebase_config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {database} from '../firebase_config';
+import {database} from '../../firebase_config';
 import {getDocs, collection, QuerySnapshot, QueryDocumentSnapshot} from "firebase/firestore";
 
 
@@ -51,10 +51,10 @@ const Goals : NextPage = () => {
             <></>}
             <Topbar />
             <div className="grid bg-gradient-to-tr from-[#354259] to-[#3F1C1C] pt-16 ">
-            { goalData.map((data:any) => <GoalCard key={data.id} goalTitle={data.goalTitle} goalDescr={data.goalDescr} /> )}
+            { goalData.map((data:any) => <GoalCard key={data.id} index={data.id} goalTitle={data.goalTitle} goalDescr={data.goalDescr} /> )}
             </div>
             <div onClick={()=>setCreateMode(true)} className=" flex justify-center items-center cursor-pointer opacity-[25%] text-white top-32 absolute right-10 rounded-lg w-48">
-                New Project
+                New Goal
             </div>
             
         </div>

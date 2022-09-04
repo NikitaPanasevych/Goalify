@@ -8,14 +8,15 @@ import { getDoc, doc, collection, QuerySnapshot, QueryDocumentSnapshot } from "f
 
 import Topbar from "../../components/Topbar";
 import { auth, database,  } from '../../firebase_config';
+import ProgressCircle from "../../components/ProgressCircles";
 
 
 
 const Project: NextPage = () => {
 
     const router = useRouter();
-    const projectId = router.query.projectId;
-    const [projectInfo,setProjectInfo] = useState<{title: string, description: string}>({
+    const goalId = router.query.goalId;
+    const [goalInfo ,setGoalInfo] = useState<{title: string, description: string}>({
         title: '',
         description: '',
     })
@@ -24,11 +25,11 @@ const Project: NextPage = () => {
 
     useEffect(() => {
         if (loading) {console.log('loading');}
-        if(user && typeof(projectId) === 'string') {
+        if(user && typeof(goalId) === 'string') {
             const getData = async () => {
-                const docSnap = await getDoc(doc(database, 'users', user?.uid, 'projects', projectId));
+                const docSnap = await getDoc(doc(database, 'users', user?.uid, 'Goals', goalId));
                 docSnap.exists() ?
-                    setProjectInfo({
+                    setGoalInfo({
                         title: docSnap.data().title,
                         description: docSnap.data().description
                     }) : console.log('No document found');
@@ -40,13 +41,15 @@ const Project: NextPage = () => {
     return (
         <>
         <Head>
-            <title>Project - {projectInfo.title}</title>
+            <title>Project - {goalInfo.title}</title>
         </Head>
-        <Topbar />
-        <div>
-            <h1 className="block text-center m-4 text-2xl">Information about the {projectId}</h1>
-            <h2 className="m-2 text-3xl font-bold">{projectInfo.title}</h2>
-            <h5 className="m-2 text-1xl">{projectInfo.description}</h5>
+        <div className=" h-screen Bg">
+            <Topbar />
+            <div className=" bg-black text-white grid w-[75%] h-[70%] ">
+                <div className="block text-center m-4 text-2xl">{goalInfo.title}</div>
+                <div className="m-2 text-1xl">{goalInfo.description}</div>
+                <ProgressCircle />
+            </div>
         </div>
         </>
     );

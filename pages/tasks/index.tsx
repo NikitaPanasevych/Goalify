@@ -2,8 +2,8 @@ import { NextPage } from "next"
 import Head from "next/head";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Topbar from "../components/Topbar";
-import { auth } from "../firebase_config";
+import Topbar from "../../components/Topbar";
+import { auth } from "../../firebase_config";
 
 const Tasks : NextPage = () => {
 

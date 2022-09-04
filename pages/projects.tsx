@@ -33,12 +33,12 @@ const Projects : NextPage = () => {
     return (
         <>
         <Topbar />
-        <div className="  h-screen bg-gradient-to-tr from-[#354259] to-[#3F1C1C]">
+        <div className="  h-screen Bg">
             <div className=" absolute  flex flex-wrap pt-28  pl-32 ">
                 
                 <h1 className=" absolute -translate-y-16 text-4xl text-white">Projects</h1>
                  {projectData.map((data:any) => <ProjectCard key={data.userID} projectTitle={data.title} projectDesc={data.description} /> )}
-                
+
             </div>
             <div onClick={()=>setCreateMode(true)} className=" flex justify-center items-center cursor-pointer opacity-[25%] text-white top-32 absolute right-10 rounded-lg w-48">
                 New Project

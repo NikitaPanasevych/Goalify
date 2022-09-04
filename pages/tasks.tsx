@@ -39,12 +39,12 @@ const Tasks : NextPage = () => {
         .then((userData) => {
             const data = userData.data()?.goals;
             data.map((goal: any) => {
-                // console.log(goal.goal_id)
+                console.log(goal.goal_id)
             })
             })
         
 
-        // updateUser();
+        updateUser();
     }, [user, loading]);
 
     //function to generate unique ids for projects

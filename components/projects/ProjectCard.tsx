@@ -12,7 +12,7 @@ const ProjectCard : React.FC<IProjectCard> = (props) => {
         whileHover={{ scale: [null, 1.2, 1.1] }}
         transition={{ duration: 0.3 }}
       >
-        <div className=" cursor-pointer mr-8 mb-8 w-64 h-32 rounded-lg bg-[#171010] text-white pt-3 pl-3">
+        <div className=" cursor-pointer mr-8 mb-8 w-64 h-32 rounded-lg bg-[#2E3542] text-black pt-3 pl-3">
             <div className=" absolute translate-x-44 w-14 h-14 bg-red-600 rounded-md"></div>
             <h1 className=" text-xl">{props.projectTitle}</h1>
             <div className=" text-[#B4A5A5] w-40  break-words">{props.projectDesc}</div>

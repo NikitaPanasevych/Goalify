@@ -41,7 +41,7 @@ const Projects : NextPage = () => {
             <title>Projects - {user?.displayName}</title>
         </Head>
         <Topbar />
-        <div className="  h-screen bg-gradient-to-tr from-[#354259] to-[#3F1C1C]">
+        <div className="  h-screen Bg">
             <div className=" absolute  flex flex-wrap pt-28  pl-32 ">
                 
                 <h1 className=" absolute -translate-y-16 text-4xl text-white">Projects</h1>

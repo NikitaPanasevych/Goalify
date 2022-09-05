@@ -17,14 +17,15 @@ const Dashboard : NextPage = () => {
     const [DBdata, setDBdata] = useState<any>({})
 
     useEffect(()  => {
-        if(loading) return;
-        if(!user) Router.push('/');
-        if(user) Router.push('/dashboard');
-        if (user || !loading) {
-            onSnapshot(doc(database, "users", "CoW7s3hApYcLnl6H5BqZgHvQ56d2"/*user?.uid  треба шоб не було undefined*/), (doc:any) => {
-                    setDBdata(doc.data())})}
-        console.log(DBdata);
-    }, [loading, user])
+        if(loading) {
+            console.log('Initializing user...');   
+        }
+        if(user) onSnapshot(doc(database, "users", user.uid), (doc:any) => setDBdata(doc.data()));
+
+        if(!loading && !user) Router.push('/'); 
+
+        if(error) alert('Error: ' + error);
+    }, [loading, user, error])
 
 
 
@@ -33,13 +34,18 @@ const Dashboard : NextPage = () => {
             <Topbar />
             <div className="">
                 <h1 className=" text-white mt-2 text-4xl text-center">
-                    {/*DBdata.goals[0].goal_desc*/}
+                    { 
+                        DBdata.goals ? DBdata.goals[0].goal_desc : null 
+                    }
+                    
                     <IconButton aria-label="delete" color="primary">
                         <ChangeCircleIcon />
                     </IconButton>
                     </h1>
                 <div className="flex mt-2 overflow-x-hidden h-48 pt-4">
-                    {/*DBdata.goals[0].projects.map((data:any)=><CarouselCard projectTitle={data.project_desc} key={data.id} />)*/}
+                    { 
+                        DBdata.goals ? DBdata.goals[0].projects.map((data:any)=><CarouselCard key={data.project_id} projectTitle={data.project_desc}  />) : null
+                    }
                 </div>
                 </div>
         </div>

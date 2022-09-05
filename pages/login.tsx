@@ -7,6 +7,8 @@ import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
+import Head from "next/head";
+
 
 //Components
 import SignUp from "../components/loginComponents/SignUp";
@@ -30,9 +32,11 @@ const Login: NextPage = () => {
   return (
 
     <div className="flex login-page-Bg h-screen">
-      <title>Login</title>
+      <Head>
+            <title>Login</title>
+        </Head>
       <div className="login-page pt-5 bg-gradient-to-t from-white to-[#FFF89A] rounded-xl">
-        <div className=" grid">
+        <div className="huyi grid">
           <h1><a href='/guest'>Vision</a></h1>
           <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
             {mode === 'signup' ?  <Button disabled>Sign up</Button> : <Button name="signup" onClick={() => {setMode("signup")}}>Sign up</Button>}

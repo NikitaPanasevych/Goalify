@@ -2,12 +2,12 @@ import { NextPage } from "next"
 import Head from 'next/head';
 
 
-import {auth, database} from '../firebase_config'
+import {auth, database} from '../../firebase_config'
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useEffect } from "react";
 import { getDocs, collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
 
-import Topbar from "../components/Topbar";
+import Topbar from "../../components/Topbar";
 
 const Tasks : NextPage = () => {
 

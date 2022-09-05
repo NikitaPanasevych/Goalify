@@ -9,45 +9,44 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 
-interface IProjects{
+interface IGoals{
     onClose: () => void;
     onAdd: () => void;
 }
 
-interface IProjectData {
+interface IGoalData {
     title: string,
     description: string
 }
 
-const AddProject : React.FC<IProjects> = (props) => {
+const AddGoal : React.FC<IGoals> = (props) => {
 
     const [user, loading, error] = useAuthState(auth);
     const transition : any = user?.uid;
     const UID : string = transition
-    const db : CollectionReference<DocumentData> = collection(database, "users", UID, "projects" )
-    const [projectData, setProjectData] = useState<IProjectData>({
+    const db : CollectionReference<DocumentData> = collection(database, "users", UID, "Goals" )
+    const [goalData, setGoalData] = useState<IGoalData>({
         title: '',
         description: ''
     })
 
     const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProjectData({...projectData, [e.target.name]: e.target.value})
+        setGoalData({...goalData, [e.target.name]: e.target.value})
     }
 
-    const saveProject = async () => {
-        await addDoc(db, projectData );
+    const saveGoal = async () => {
+        await addDoc(db, goalData );
         alert("success");
-        
     }
 
     return(
         <div className=" fixed left-0 w-screen h-screen">
             <div className=" w-[60%] h-[80%] text-center  bg-white m-auto rounded-lg">
-                <h1 className=" text-4xl pt-3">Create New Project</h1>
+                <h1 className=" text-4xl pt-3">Create New Goal</h1>
                 <div className=" grid w-[50%] h-[50%] m-auto mt-5">
-                <TextField className=" pt-5" id="outlined-basic" onChange={handleData} name="title" value={projectData.title} label="Project title" variant="outlined" />
-                <TextField className=" pt-5" id="outlined-basic" onChange={handleData} name="description" value={projectData.description} label="Project description" variant="outlined" />
-                <Button onClick={() => {saveProject(),props.onClose();props.onAdd();}} variant="outlined">Save Project</Button>
+                <TextField className=" pt-5" id="outlined-basic" onChange={handleData} name="title" value={goalData.title} label="Project title" variant="outlined" />
+                <TextField className=" pt-5" id="outlined-basic" onChange={handleData} name="description" value={goalData.description} label="Project description" variant="outlined" />
+                <Button onClick={() => {saveGoal(),props.onClose();props.onAdd();}} variant="outlined">Save Project</Button>
                 </div>
                 <IconButton  size="large" onClick={props.onClose} className=" absolute translate-x-72 -translate-y-12">
                     <CloseIcon></CloseIcon>
@@ -57,4 +56,4 @@ const AddProject : React.FC<IProjects> = (props) => {
     )
 }
 
-export default AddProject;
+export default AddGoal;

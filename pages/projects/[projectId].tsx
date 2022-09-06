@@ -9,8 +9,6 @@ import { getDoc, doc, collection, QuerySnapshot, QueryDocumentSnapshot } from "f
 import Topbar from "../../components/Topbar";
 import { auth, database,  } from '../../firebase_config';
 
-
-
 const Project: NextPage = () => {
 
     const router = useRouter();

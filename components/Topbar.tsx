@@ -1,5 +1,5 @@
 import { auth, logOut } from "../firebase_config"
-import Logo from "./Homepage/GuestComponents/logo"
+import Logo from "./homepage/GuestComponents/logo"
 import { Avatar, Menu, MenuItem, Tooltip, IconButton, Divider, ListItemIcon } from "@mui/material"
 import { Logout, PersonAdd, Settings } from "@mui/icons-material"
 import Link from "next/link"

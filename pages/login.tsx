@@ -11,8 +11,8 @@ import Head from "next/head";
 
 
 //Components
-import SignUp from "../components/loginComponents/SignUp";
-import LogIn from "../components/loginComponents/LogIn";
+import SignUp from "../components/login/SignUp";
+import LogIn from "../components/login/LogIn";
 import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
 

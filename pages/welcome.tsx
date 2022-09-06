@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 
 //Components
-import Logo from "../components/Homepage/GuestComponents/logo"
+import Logo from "../components/homepage/GuestComponents/logo"
 import { Button } from "@mui/material"
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';

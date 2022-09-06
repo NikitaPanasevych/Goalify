@@ -9,7 +9,7 @@ import { auth } from "../firebase_config";
 import { AuthStateHook, useAuthState } from "react-firebase-hooks/auth";
 import { onSnapshot, doc} from "firebase/firestore";
 import { database } from "../firebase_config";
-import CarouselCard from "../components/Dashboard/Carousel";
+import CarouselCard from "../components/dashboard/Carousel";
 
 const Dashboard : NextPage = () => {
 

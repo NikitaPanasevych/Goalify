@@ -5,7 +5,7 @@ import Head from 'next/head';
 import {auth, database, generateUID} from '../../firebase_config'
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useEffect } from "react";
-import { getDocs, collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, updateDoc, doc, getDoc, DocumentSnapshot, DocumentData } from "firebase/firestore";
 
 import Topbar from "../../components/Topbar";
 
@@ -17,7 +17,7 @@ const Tasks : NextPage = () => {
         
         loading ? console.log('Loading page') : null;
         if(user) getDoc(doc(database, 'users', user.uid))
-        .then((userData) => {
+        .then((userData:  DocumentSnapshot<DocumentData>) => {
             const data = userData.data()?.goals;
             data.map((goal: any) => {
                 // console.log(goal.goal_id)

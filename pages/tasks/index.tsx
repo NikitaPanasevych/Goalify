@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import Head from 'next/head';
 
 
-import {auth, database} from '../../firebase_config'
+import {auth, database, generateUID} from '../../firebase_config'
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useEffect } from "react";
 import { getDocs, collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
@@ -16,30 +16,11 @@ const Tasks : NextPage = () => {
     useEffect(() => {
         
         loading ? console.log('Loading page') : null;
-        // user ? getDocs(collection(database, 'users', user.uid, 'Goals'))
-        //         .then((result) => {
-        //             result.docs.map((item) => {
-        //                 getDocs(collection(database,'users', user.uid, 'Goals', item.id, 'Projects'))
-        //                 .then((projectResult) => {
-        //                     projectResult.docs.map((project) => {
-        //                         getDocs(collection(database, 'users', user.uid, 'Goals', item.id, 'Projects', project.id, 'Tasks'))
-        //                         .then((tasksResult) => {
-        //                             // console.log(tasksResult.docs);
-        //                         })
-        //                     })
-        //                 }) 
-        //             })
-        //         })
-        //         .catch((error) => {
-        //             console.log(error.code);
-        //         })
-        // : console.log('No user found');
-
         if(user) getDoc(doc(database, 'users', user.uid))
         .then((userData) => {
             const data = userData.data()?.goals;
             data.map((goal: any) => {
-                console.log(goal.goal_id)
+                // console.log(goal.goal_id)
             })
             })
         
@@ -47,13 +28,8 @@ const Tasks : NextPage = () => {
         updateUser();
     }, [user, loading]);
 
-    //function to generate unique ids for projects
-    //Specify 'ident' parameter: g - for goals, p - for project, t - tasks
-    const generateUID = (ident?: string) => {
-        const rndNum = Math.floor(Math.random()*(Math.random()*Date.now()));
-        console.log(rndNum);
-        console.log(ident + rndNum.toString(36));
-    }
+    
+    
     generateUID('g');
 
     // Array type database

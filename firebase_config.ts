@@ -81,9 +81,18 @@ export const signInWithEmail = async (userEmail: string, userPassword: string) =
   }
 }
 
+/* <-------------------------------------------------Log out function-----------------------------------------------------------------------> */
+
 export const logOut = () => {
   signOut(auth);
   Router.push('/');
   console.log("Log out complete!");
 }
-
+/* <-------------------------------------------------Generating unque id------------------------------------------------------------> */
+//function to generate unique ids for projects
+//Specify 'ident' parameter: g - for goals, p - for project, t - tasks
+export const generateUID = (ident?: string) => {
+  const rndNum = Math.floor(Math.random()*(Math.random()*Date.now()));
+  console.log(rndNum);
+  console.log(ident + rndNum.toString(36));
+}

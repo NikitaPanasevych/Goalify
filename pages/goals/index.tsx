@@ -17,7 +17,7 @@ const Goals : NextPage = () => {
     const [createMode, setCreateMode] = useState(false);
     const [isAdded, setAdded] = useState(false);
     const [user, loading, error] = useAuthState(auth);
-    const [goalData, setGoalData] = useState([{}])
+    const [goalData, setGoalData] = useState([])
 
     useEffect(() => {
         if(loading) {console.log('loading');}

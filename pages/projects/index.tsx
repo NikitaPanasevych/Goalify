@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Router from 'next';
+import Router from 'next/router';
 import Head from 'next/head';
 //Components
 import ProjectCard from "../../components/projects/ProjectCard";
@@ -13,32 +13,57 @@ import AddIcon from '@mui/icons-material/Add';
 import { auth } from "../../firebase_config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {database} from '../../firebase_config';
-import {getDocs, collection, QuerySnapshot, QueryDocumentSnapshot} from "firebase/firestore";
+import {DocumentSnapshot, DocumentData, getDoc, doc} from "firebase/firestore";
 
 const Projects : NextPage = () => {
 
     const [createMode, setCreateMode] = useState(false);
     const [user, loading, error] = useAuthState(auth);
-    const [projectData, setProjectData] = useState([{}])
+    const [projectData, setProjectData] = useState<{
+        goal_id: string,
+        project_id: string,
+        project_desc?: string,
+        project_title: string,
+    }>()
     const [isAdded, setAdded] = useState(false);
+    let projectsData: any
 
     useEffect(() => {
         if(loading) {console.log('loading');}
-        else if(!user) {return}
-        else if(user) getDocs(collection(database, "users", user?.uid, "projects" ))
-            .then((data : QuerySnapshot) => {
-                setProjectData(data.docs.map((item: QueryDocumentSnapshot) => {
-                    return { ...item.data(), id: item.id }
-                }));
+        if(!loading && !user) Router.push('/');
+        if(!loading && user) getDoc(doc(database, "users", user.uid))
+            .then((userData: DocumentSnapshot<DocumentData>) => {
+                userData.data()?.goals.map((goalData: any) => {
+                    let curGoal: {
+                        goal_id: string,
+                        project_id: string,
+                        project_desc?: string,
+                        project_title: string,
+                    };
+                    goalData.projects.map((prjData: any) => {
+                        curGoal = {
+                            goal_id: goalData.goal_id,
+                            project_id: prjData.project_id,
+                            project_desc: prjData?.project_desc,
+                            project_title: prjData?.project_title
+                        }
+                        setProjectData({...projectData, curGoal})
+                    })
+                    
+                })
             })
-        setAdded(false);
+            .catch((error) => {
+                console.log(error.code);
+                alert('Error occured while fetching data... Thank you for your patience.');
+            })
+            setAdded(false);
     }, [user, loading, isAdded])
 
     //Initial commit for dynamic project routes
     return (
         <>
         <Head>
-            <title>Projects - {user?.displayName}</title>
+            <title>Projects</title>
         </Head>
         <Topbar />
         <div className="  h-screen Bg">

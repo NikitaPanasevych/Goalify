@@ -1,26 +1,15 @@
-import { NextPage } from "next";
-//Firebase
-import { auth } from "../firebase_config";
-import { useAuthState } from "react-firebase-hooks/auth";
-import {database} from '../firebase_config';
-import {getDoc, collection, doc, onSnapshot, CollectionReference,  QuerySnapshot, QueryDocumentSnapshot, DocumentData, getDocs} from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { Reorder, motion } from "framer-motion";
+import { useState } from "react";
+import Loading from "../components/Loading";
 
+const Test = () => {
+    const [items, setItems] = useState([0, 1, 2, 3])
 
-
-const test = () => {
- 
-
-    const unsub = onSnapshot(doc(database, "users", "wGlHxp1UVcTAQWCTnMxH3t2mAxM2"), (doc) => {
-        console.log(doc.data().goals);
-    });
- 
- 
-    return(
-        <div className=" Bg w-screen h-screen">
-
-        </div>
+    return (
+      <div className=" grid h-screen">
+         <Loading />
+      </div>
     )
 }
 
-export default test;
+export default Test;

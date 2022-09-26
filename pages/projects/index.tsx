@@ -1,6 +1,6 @@
 import { NextPage } from "next"
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Reorder } from "framer-motion";
 import Router from 'next/router';
 import Head from 'next/head';
 //Components

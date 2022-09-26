@@ -117,19 +117,9 @@ html{
 /* Guest.tsx */
 
 .logo {
-	animation: rotation 24s infinite linear;
+	animation: rotation 16s infinite linear;
   }
 
-.arrow {
-	fill: #9ADCFF;
-	animation: arrow 4s infinite linear;
-}
-
-	@keyframes arrow {
-		0% { fill: #9ADCFF; }
-		50% {fill: #FFF89A}
-		100% { fill: #9ADCFF; }
-	}
   
   @keyframes rotation {
 	from {
@@ -279,8 +269,9 @@ nav {
   /*	Carousel	*/
   
   .card {
-	height: 150px;
-	width: 250px;
+	height: 100px;
+	width: 200px;
+	color: #eeeeee;
 	background-color: #17141d;
 	border-radius: 10px;
 	box-shadow: -1rem 0 3rem #000;
@@ -296,6 +287,7 @@ nav {
   
   .card:hover {
 	transform: translateY(-20px);
+	background-color: #D61C4E;
 	transition: 0.4s ease-out;
   }
   
@@ -305,16 +297,10 @@ nav {
 	transition: 0.4s ease-out;
   }
   
-  .title {
-	color: white;
-	font-weight: 300;
-	position: absolute;
-	left: 20px;
-	top: 15px;
-  }
-  
   .card:hover  {
-	width: 400px;
+	width: 250px;
+	height: 150px;
+	cursor: pointer;
 	transition: 0.4s ease-out;
   }
   

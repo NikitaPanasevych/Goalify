@@ -1,17 +1,21 @@
 import { auth, logOut } from "../firebase_config"
-import Logo from "./Homepage/GuestComponents/logo"
 import { Avatar, Menu, MenuItem, Tooltip, IconButton, Divider, ListItemIcon } from "@mui/material"
 import { Logout, PersonAdd, Settings } from "@mui/icons-material"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
+import { red } from "@mui/material/colors"
+import { getDoc, doc } from "firebase/firestore"
+import { database } from "../firebase_config";
+
 
 
 
 const Topbar: React.FC = () => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl)
+    const open = Boolean(anchorEl);
+    const [user, loading, error] = useAuthState(auth);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget)
@@ -20,12 +24,20 @@ const Topbar: React.FC = () => {
         setAnchorEl(null);
     }
 
-    const [user, loading, error] = useAuthState(auth);
+    useEffect(()  => {
+        if(loading) {console.log('loading');}
+        else if(!user) {return}  
+        else if(!loading && user)
+            {
+            getDoc(doc(database, "users", user.uid))
+            console.log(user.providerData[0].displayName)
+            }
+    },[loading, user, error])
 
     return (
         <nav id="nav-1">
-            <div className="absolute top-3 left-3">
-                <svg width="50" height="50" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="absolute hover:cursor-pointer top-2 left-1">
+                <svg width="30" height="30" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M336.634 629.921L307.673 409.376C334.901 476.208 389.505 610.317 390.099 612.099C390.842 614.327 391.584 617.297 392.327 619.525C393.069 621.752 393.069 625.465 393.069 627.693C393.069 629.921 391.584 632.891 391.584 633.634C391.584 634.376 388.614 638.832 387.871 640.317C387.129 641.802 384.901 644.03 384.158 644.772C383.416 645.515 378.218 648.485 377.475 649.228C376.881 649.822 373.762 650.96 372.277 651.455L365.594 652.198L361.139 651.455L355.198 649.97L348.515 647L344.059 643.287L339.604 637.347L336.634 629.921Z" fill="#FF0000" stroke="#FF0000" />
                     <path d="M489.604 118.287L420.545 332.891L543.069 138.337V131.653L542.327 125.713L540.842 121.257L538.614 116.802L535.644 113.089L531.188 108.634L523.762 104.178L519.307 102.693L514.109 101.95L508.911 102.693L504.455 104.178L500 107.148L494.802 111.604L489.604 118.287Z" fill="#FF0000" stroke="#FF0000" />
                     <path d="M401.238 90.8119L410.149 309.871L458.416 91.5545V85.6139L457.673 81.1584L456.188 76.703L453.96 72.2475L450.248 67.7921L445.792 64.0792L441.337 61.1089L435.396 59.6238H425L420.545 61.1089L417.574 62.5941L414.604 64.0792L410.149 67.0495L405.693 71.505L402.723 77.4456L401.238 83.3862V90.8119Z" fill="#FF0000" stroke="#FF0000" />
@@ -46,11 +58,10 @@ const Topbar: React.FC = () => {
                     <path d="M603.96 261.604L416.832 380.416L630.693 312.099L638.861 306.158L644.059 298.733L646.287 286.851L644.059 276.455L638.861 267.544L630.693 261.604L620.297 257.891H612.129L603.96 261.604Z" fill="#FF0000" stroke="#FF0000" />
                 </svg>
             </div>
-            <Link href="/dashboard"><a className="link-1">Home</a></Link>
-            <Link href="/tasks"><a className="link-1">Tasks</a></Link>
-            <Link href="/projects"><a className="link-1">Projects</a></Link>
-            <Link href="/goals"><a className="link-1">Goals</a></Link>
-            <div className=" absolute right-2 top-2">
+            <div>
+
+            </div>
+            <div className=" absolute right-2 top-0">
                 <Tooltip title="Account menu">
                     <IconButton
                         onClick={handleClick}
@@ -59,7 +70,7 @@ const Topbar: React.FC = () => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 45, height: 45 }}>M</Avatar>
+                        <Avatar sx={{ width: 35, height: 35, bgcolor: red[900] }} >{user && (user.displayName)}</Avatar>
                     </IconButton>
                 </Tooltip>
                 <Menu

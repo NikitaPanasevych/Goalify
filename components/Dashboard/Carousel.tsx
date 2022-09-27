@@ -13,6 +13,7 @@ const CarouselCard : React.FC<ICarouselCard> = (props) => {
 
     const handleClick = () => {
         setVisibility(!visibility);
+        
     }
     return(
         <>
@@ -21,7 +22,7 @@ const CarouselCard : React.FC<ICarouselCard> = (props) => {
                     <h2 className="">{props.projectDescr}</h2>
                     <h3>SubTasks 10/10 </h3>
             </div>
-            {visibility ? <Card /> : null}
+            {visibility ? <Card title={props.projectTitle} text={props.projectDescr} tasks={['Task 1', 'Task 2']} /> : null}
         </>
     )
 }

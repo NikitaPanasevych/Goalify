@@ -385,17 +385,24 @@ nav {
 #tasksCard{
 	display: block;
 	position: absolute;
-	background-color: white;
+	background-color: crimson;
 	text-align: center;
 	padding: .4em;
 	top: 10em;
 	right: 15em;
 	left: 15em;
 	bottom: 10em;
+	animation-name: anim-tasksCard;
+	animation-duration: 1s;
 }
 
  @keyframes anim-tasksCard{
-	to{
-		
+	from {
+		translate: -35em -20em;
+		scale: 0;
+	}
+	to {
+		translate: 0 0;
+		scale: 1;
 	}
  }

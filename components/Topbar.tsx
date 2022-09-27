@@ -70,7 +70,7 @@ const Topbar: React.FC = () => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 35, height: 35, bgcolor: red[900] }} >{user && (user.displayName)}</Avatar>
+                        <Avatar sx={{ width: 35, height: 35, bgcolor: red[900] }} >{user && (user.displayName?.substring(0,1))}</Avatar>
                     </IconButton>
                 </Tooltip>
                 <Menu

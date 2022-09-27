@@ -289,6 +289,7 @@ nav {
 	transform: translateY(-20px);
 	background-color: #D61C4E;
 	transition: 0.4s ease-out;
+	
   }
   
   .card:hover ~ .card {
@@ -379,3 +380,22 @@ nav {
 
 /*---------------------------------------- GOAL CARD---------------------------------------- */
 
+
+/* --------------------------------------- Tasks Card -------------------------------------- */
+#tasksCard{
+	display: block;
+	position: absolute;
+	background-color: white;
+	text-align: center;
+	padding: .4em;
+	top: 10em;
+	right: 15em;
+	left: 15em;
+	bottom: 10em;
+}
+
+ @keyframes anim-tasksCard{
+	to{
+		
+	}
+ }

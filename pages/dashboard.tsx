@@ -9,6 +9,7 @@ import { collection, getDocs, QuerySnapshot, QueryDocumentSnapshot} from "fireba
 import { database } from "../firebase_config";
 import CarouselCard from "../components/Dashboard/Carousel";
 import Loading from "../components/Loading";
+import AddNewTask from "../components/Dashboard/AddNewTaskCard";
 
 const Dashboard : NextPage = () => {
 
@@ -43,7 +44,8 @@ const Dashboard : NextPage = () => {
                 :
                 <div>
                     <div className="flex mt-2 overflow-x-hidden h-48 p-4">
-                            {DBdata.map((data:any)=><CarouselCard key={data.id} projectTitle={data.TaskName} projectDescr={data.TaskDescr} />)}
+                            {DBdata.map((data:any)=><CarouselCard key={data.id} projectTitle={data.TaskName} />)}
+                            <AddNewTask />
                     </div>
                 </div>
                 }

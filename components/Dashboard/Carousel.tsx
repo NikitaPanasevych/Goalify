@@ -1,10 +1,10 @@
-import Card from './Card';
+import Card from './ExtendedCarousel';
 import {useState} from 'react';
+import { LinearProgress } from "@mui/material";
 
 
 interface ICarouselCard {
     projectTitle : string;
-    projectDescr : string;
 }
 
 const CarouselCard : React.FC<ICarouselCard> = (props) => {
@@ -18,11 +18,9 @@ const CarouselCard : React.FC<ICarouselCard> = (props) => {
     return(
         <>
             <div className="card p-2" onClick={handleClick}>
-                    <h1 className=" ">{props.projectTitle}</h1>
-                    <h2 className="">{props.projectDescr}</h2>
-                    <h3>SubTasks 10/10 </h3>
+                    <h1 className=" text-center">{props.projectTitle}</h1>       
             </div>
-            {visibility ? <Card title={props.projectTitle} text={props.projectDescr} tasks={['Task 1', 'Task 2']} /> : null}
+            {visibility ? <Card title={props.projectTitle} tasks={['Task 1', 'Task 2']} /> : null}
         </>
     )
 }

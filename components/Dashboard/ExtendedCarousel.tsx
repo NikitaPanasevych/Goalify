@@ -8,7 +8,6 @@ interface ISingleCard{
 
 
 const Card : React.FC<ISingleCard> = (props) => {
-    // alert('worked');
     return (
         <div id="tasksCard" className="text-white" >
             <>

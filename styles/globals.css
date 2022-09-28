@@ -269,7 +269,7 @@ nav {
   /*	Carousel	*/
   
   .card {
-	height: 100px;
+	height: 75px;
 	width: 200px;
 	color: #eeeeee;
 	background-color: #1363DF;
@@ -285,19 +285,6 @@ nav {
 	  margin-left: 25px;
   }
   
-  .card:hover {
-	transform: translateY(-20px);
-	background-color: #D61C4E;
-	transition: 0.4s ease-out;
-	
-  }
-  
-  .card:hover  {
-	width: 250px;
-	height: 150px;
-	cursor: pointer;
-	transition: 0.4s ease-out;
-  }
   
   .card:hover .stroke {
 	stroke-dashoffset: 100;

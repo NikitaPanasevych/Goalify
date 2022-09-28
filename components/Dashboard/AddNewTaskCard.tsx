@@ -7,8 +7,6 @@ import { auth, database} from "../../firebase_config"
 import { collection, addDoc, CollectionReference, DocumentData } from 'firebase/firestore'
 import { useAuthState } from "react-firebase-hooks/auth";
 
-
-
 const AddNewTask:React.FC = () => {
 
     const [clicked, setClicked] = useState(false);
@@ -16,15 +14,14 @@ const AddNewTask:React.FC = () => {
     const transition : any = user?.uid;
     const UID : string = transition
     const db : CollectionReference<DocumentData> = collection(database, "users", UID, "Tasks" )
-    const [projectData, setProjectData] = useState({title: ''})
+    const [projectData, setProjectData] = useState({TaskName: ''})
 
     const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProjectData({...projectData, [e.target.name]: e.target.value})
     }
 
     const saveProject = async () => {
-        await addDoc(db, projectData );
-        alert("success");
+        await addDoc(db, projectData);
     }
 
     return(
@@ -36,11 +33,11 @@ const AddNewTask:React.FC = () => {
                 animate={{opacity:1, scale:1}}
                 transition={{ duration:0.3}}
                 exit={{opacity:0}}
-                className=" h-[100px] w-[200px]"
+                className=" h-[75px] w-[200px]"
             >
                 <div 
                 className=' 
-                h-[102px]
+                h-[77px]
                 w-[202px]
                 bg-[#D61C4E]
                 ml-[25px]
@@ -57,8 +54,8 @@ const AddNewTask:React.FC = () => {
                         <label className="sr-only"> Email </label>
                         <input
                         onChange={handleData}
-                        name="title"
-                        value={projectData.title}
+                        name="TaskName"
+                        value={projectData.TaskName}
                         type="email"
                         id="UserEmail"
                         placeholder=" Task name"
@@ -99,7 +96,7 @@ const AddNewTask:React.FC = () => {
                 initial={{opacity:0}}
                 animate={{opacity:1}}
                 transition={{ duration: 0.3 }}
-                className=" h-[100px] w-[200px]"
+                className=" h-[75px] w-[200px]"
             >
                 <div onClick={()=>setClicked(true)}
                 className=" 
@@ -112,11 +109,11 @@ const AddNewTask:React.FC = () => {
                 cursor-pointer 
                 border-white 
                 ml-[25px]
-                h-[100px] 
+                h-[75px] 
                 hover:border-[#D61C4E]
                 hover:text-[#D61C4E] 
                 transition ease-in-out delay-[30] ">
-                    <h1 className=" h-[28px] text-center mt-3 mb-0">Add New Task</h1>
+                    <h1 className=" h-[18px] text-center text-base mt-1 mb-0">Add New Task</h1>
                     <h2 className=' text-center  text-5xl'>+</h2>
                 </div>
             </motion.div>

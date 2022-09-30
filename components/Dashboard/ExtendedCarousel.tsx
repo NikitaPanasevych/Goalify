@@ -1,6 +1,6 @@
 
 interface ISingleCard{
-    title?: string,
+    title: string,
     text?: string,
     tasks?: Array<string>,
 

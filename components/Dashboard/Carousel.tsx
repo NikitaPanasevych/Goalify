@@ -19,11 +19,13 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
         setVisibility(!visibility)
        }
 
+    let projectTitleLength: number = 17;
+
     return(
         <>
             <div className="card p-2" >
                     <h1 className=" text-center h-[20px]">
-                        {props.projectTitle}
+                        {props.projectTitle.length > projectTitleLength ? props.projectTitle.substring(0,projectTitleLength) : props.projectTitle}
                         <IconButton aria-label="delete" onClick={()=>props.onDelete(props.id)}>
                             <DeleteIcon />
                         </IconButton>

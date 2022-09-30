@@ -35,7 +35,7 @@ const Dashboard : NextPage = () => {
         /*setDBdata(DBdata.filter((task:any)=>{
             return task.id !== id;
         }))*/
-       await deleteDoc(doc(database, "users", user?.uid, "Tasks", id));
+       await (user ? deleteDoc(doc(database, "users", user.uid, "Tasks", id)) : null);
       }
 
     return(

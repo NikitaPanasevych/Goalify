@@ -1,12 +1,15 @@
 import { NextPage } from "next";
 import Router from 'next/router';
 import { useEffect, useState } from "react";
-import Topbar from "../components/Topbar";
+
 //firebase
 import { auth } from "../firebase_config";
 import {  useAuthState } from "react-firebase-hooks/auth";
-import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot} from "firebase/firestore";
+import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot } from "firebase/firestore";
 import { database } from "../firebase_config";
+
+//custom templates
+import Topbar from "../components/Topbar";
 import CarouselCard from "../components/Dashboard/Carousel";
 import Loading from "../components/Loading";
 import AddNewTask from "../components/Dashboard/AddNewTaskCard";

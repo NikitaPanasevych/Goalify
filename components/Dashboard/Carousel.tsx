@@ -1,5 +1,5 @@
 import Card from './ExtendedCarousel';
-import {useState} from 'react';
+import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -19,20 +19,20 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
         setVisibility(!visibility)
        }
 
-    let projectTitleLength: number = 17;
+    let projectTitleLength: number = 15;
 
     return(
         <>
             <div className="card p-2" >
                     <h1 className=" text-center h-[20px]">
-                        {props.projectTitle.length > projectTitleLength ? props.projectTitle.substring(0,projectTitleLength) : props.projectTitle}
-                        <IconButton aria-label="delete" onClick={()=>props.onDelete(props.id)}>
+                        {props.projectTitle.length > projectTitleLength ? props.projectTitle.substring(0,projectTitleLength-3)+'...' : props.projectTitle}
+                        </h1>
+                        <IconButton aria-label="expand" onClick={handleExpand}>
+                            <ExpandMoreIcon />
+                        </IconButton>
+                        <IconButton aria-label="delete" className=' translate-x-[3.2em]' onClick={()=>props.onDelete(props.id)}>
                             <DeleteIcon />
                         </IconButton>
-                        </h1>
-                        <IconButton aria-label="delete" onClick={handleExpand}>
-                            <ExpandMoreIcon />
-                        </IconButton>        
             </div>
             {visibility ? <Card title={props.projectTitle} tasks={['Task 1', 'Task 2']} /> : null}
         </>

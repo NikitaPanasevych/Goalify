@@ -113,7 +113,7 @@ const AddNewTask:React.FC = () => {
                 hover:border-[#D61C4E]
                 hover:text-[#D61C4E] 
                 transition ease-in-out delay-[30] ">
-                    <h1 className=" h-[18px] text-center text-base mt-1 mb-0">Add New Task</h1>
+                    <h1 className=" h-[18px] text-center text-base mt-1 mb-0">Add New Project</h1>
                     <h2 className=' text-center  text-5xl'>+</h2>
                 </div>
             </motion.div>

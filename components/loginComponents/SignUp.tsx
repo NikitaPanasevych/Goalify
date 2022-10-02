@@ -28,6 +28,10 @@ const SignUp: React.FC = () => {
     !showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if(e.key === "Enter") handleSignUp(userEmail, userPassword, userUserName);
+  }
+
   // ----------------------------------------------------------------------------------------------------------------------------------------
   return (
     <motion.div
@@ -40,10 +44,10 @@ const SignUp: React.FC = () => {
       }}
     >
       <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
-        <TextField className="m-1 w-[15em]" name="username" label="Username" onChange={handleChange} value={userUserName} variant="outlined" />
-        <TextField className="m-1 w-[15em]" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" />
+        <TextField className="m-1 w-[15em]" name="username" label="Username" onChange={handleChange} value={userUserName} variant="outlined" onKeyDown={handleKeyDown}/>
+        <TextField className="m-1 w-[15em]" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" onKeyDown={handleKeyDown}/>
         <div className="m-1 w-[15em]">
-          <TextField className="w-[15em]" type="password" id="user-password" name="password" onChange={handleChange} value={userPassword} label="Password" variant="outlined" />
+          <TextField className="w-[15em]" type="password" id="user-password" name="password" onChange={handleChange} value={userPassword} label="Password" variant="outlined" onKeyDown={handleKeyDown}/>
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">

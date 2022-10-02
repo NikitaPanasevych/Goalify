@@ -11,6 +11,11 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { motion } from "framer-motion";
 
 import { signInWithEmail } from "../../firebase_config";
+import { eventNames } from "process";
+
+interface KeyboardEvent{
+  key: string
+}
 
 const LogIn: React.FC = () => {
 
@@ -29,6 +34,12 @@ const LogIn: React.FC = () => {
     !showPass ? password?.setAttribute('type', 'text') : password?.setAttribute('type', 'password');
   }
 
+
+  
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if(e.key === "Enter") signInWithEmail(userEmail, userPassword);
+    }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -40,9 +51,9 @@ const LogIn: React.FC = () => {
       }}
     >
       <div className=" h-[15rem] grid align-middle justify-center text-center mt-5" >
-        <TextField className="w-[15em]" id="userEmail" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" />
+        <TextField className="w-[15em]" id="userEmail" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" onKeyDown={handleKeyDown}/>
         <div className="w-[15em]">
-          <TextField type="password" className="w-[15em]" name="password" id="user-password" label="Password" onChange={handleChange} value={userPassword} variant="outlined" />
+          <TextField type="password" className="w-[15em]" name="password" id="user-password" label="Password" onChange={handleChange} value={userPassword} variant="outlined" onKeyDown={handleKeyDown}/>
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
         <div className=" grid">

@@ -76,8 +76,9 @@ export const signInWithEmail = async (userEmail: string, userPassword: string) =
     const result = await signInWithEmailAndPassword(auth, userEmail, userPassword);
     const user = result.user;
     user ? Router.push('/dashboard') : null;
-  } catch(error) {
+  } catch(error: any) {
     console.log(error);
+    alert(error.message);
   }
 }
 

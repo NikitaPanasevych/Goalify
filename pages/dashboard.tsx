@@ -19,6 +19,9 @@ const Dashboard : NextPage = () => {
     const [user, loading, error] = useAuthState(auth);
     const [DBdata, setDBdata] = useState<any>([]);
     
+    const addNewTask = (taskText: string) => {
+        //Update the task information in the database
+    }
 
     useEffect(()  => {
         if(loading) {console.log('loading');}

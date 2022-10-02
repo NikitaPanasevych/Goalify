@@ -377,6 +377,7 @@ nav {
 	animation-duration: 1s;
 }
 
+
  @keyframes anim-tasksCard{
 	from {
 		translate: -35em -20em;

@@ -3,9 +3,6 @@ import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, duration } from '@mui/material';
 import { pink } from '@mui/material/colors';
-import { auth, database } from "../../firebase_config"
-import { collection, addDoc, CollectionReference, DocumentData } from 'firebase/firestore'
-import { useAuthState } from "react-firebase-hooks/auth";
 
 export interface IProject{
     project_title: string,

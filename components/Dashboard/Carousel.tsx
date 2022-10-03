@@ -2,7 +2,9 @@ import Card, { ITaskData } from './ExtendedCarousel';
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import { motion } from 'framer-motion';
 import InfoIcon from '@mui/icons-material/Info';
+
 
 interface ICarouselCard {
     projectTitle : string;
@@ -38,7 +40,26 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
                             <CloseIcon />
                         </IconButton>
                         <h2 className=' translate-y-[-1.75em] text-black'>
-                            <input className=' h-[80%] w-[98%]' />
+                            <input className=' h-[75%] w-[70%]' />
+                            <span className="absolute top-0 right-0 translate-x-[-0.2em] translate-y-[0.08em] grid w-10 place-content-center">
+                                    <motion.button
+                                        whileHover={{ scale: [null, 1.3, 1.1] }}
+                                        transition={{ duration: 0.3 }}
+                                        type="button"
+                                        className="text-white bg-blue-700 p-0.5 rounded-sm"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            className="w-9 h-4"
+                                        >
+                                            <path
+                                                d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"
+                                            />
+                                        </svg>
+                                    </motion.button>
+                                </span>
                         </h2>
             </div>
             <div id={props.id} className="divCard invisible">

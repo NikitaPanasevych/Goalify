@@ -9,6 +9,7 @@ interface ICarouselCard {
     projectTitle : string;
     id : string;
     onDelete(id:string):void;
+    closeAll?: void;
 }
 
 const CarouselCard:React.FC<ICarouselCard> = (props) => {
@@ -16,8 +17,11 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
     const [visibility, setVisibility] = useState(false);
 
     const handleExpand = () => {
-        setVisibility(!visibility)
-       }
+        // setVisibility(!visibility);
+        const docRef = document.getElementById(props.id)?.classList;
+        docRef?.toggle('invisible');
+        // Add an animation for new 
+    }
 
     let projectTitleLength: number = 15;
 
@@ -25,7 +29,7 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
         <>
             <div className="card p-2" >
                     <h1 className=" text-center h-[20px]">
-                        {props.projectTitle.length > projectTitleLength ? props.projectTitle.substring(0,projectTitleLength-3)+'...' : props.projectTitle}
+                        {props.projectTitle?.length > projectTitleLength ? props.projectTitle.substring(0,projectTitleLength-3)+'...' : props.projectTitle}
                         </h1>
                         <IconButton aria-label="expand" onClick={handleExpand}>
                             <ExpandMoreIcon />
@@ -34,7 +38,11 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
                             <DeleteIcon />
                         </IconButton>
             </div>
-            {visibility ? <Card title={props.projectTitle} tasks={['Task 1', 'Task 2']} /> : null}
+            <div id={props.id} className="divCard invisible">
+                <Card title={props.projectTitle} />
+            </div>
+
+                {/* {visibility ? <Card title={props.projectTitle} /> : null} */}
         </>
     )
 }

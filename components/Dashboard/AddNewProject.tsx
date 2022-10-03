@@ -27,10 +27,14 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
     const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProjectData({...projectData, [e.target.name]: [e.target.value]});
     }
+
     const onSaveProject = () => {
         setClicked(false);
-        props.onSave(projectData); 
-        projectData.project_title = '';
+        if(projectData.project_title !== "") 
+        {props.onSave(projectData) 
+        projectData.project_title = ''}
+        else
+        alert("Nameless project");
     }
 
     return (
@@ -51,18 +55,13 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                                 </Button>
                             </div>
                             <div className="relative w-[80%] m-auto mt-0">
-                                <label className="sr-only"> Email </label>
                                 <input
                                     onChange={handleData}
                                     name="project_title"
-                                    value={projectData.project_title}
-                                    type="email"
-                                    id="UserEmail"
-                                    placeholder="Project Title"
-                                    className="w-full py-2.5 pr-10 border-gray-200 hover:bg-slate-100 rounded-md shadow-sm sm:text-sm"
+                                    value={projectData.project_title} 
+                                    className=" w-[95%] mb-1"
                                 />
-
-                                <span className="absolute inset-y-0 right-0 grid w-10 place-content-center">
+                                <span className="absolute top-0 right-0 grid w-10 place-content-center">
                                     <motion.button
                                         whileHover={{ scale: [null, 1.3, 1.1] }}
                                         transition={{ duration: 0.3 }}
@@ -74,7 +73,7 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20"
                                             fill="currentColor"
-                                            className="w-4 h-4"
+                                            className="w-5 h-5"
                                         >
                                             <path
                                                 d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"

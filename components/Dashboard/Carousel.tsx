@@ -1,8 +1,8 @@
 import Card, { ITaskData } from './ExtendedCarousel';
 import { useState } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface ICarouselCard {
     projectTitle : string;
@@ -31,12 +31,15 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
                     <h1 className=" text-center h-[20px]">
                         {props.projectTitle?.length > projectTitleLength ? props.projectTitle.substring(0,projectTitleLength-3)+'...' : props.projectTitle}
                         </h1>
-                        <IconButton aria-label="expand" onClick={handleExpand}>
-                            <ExpandMoreIcon />
+                        <IconButton aria-label="expand" onClick={handleExpand} className=" translate-x-[-0.55rem] translate-y-[-1em]">
+                            <InfoIcon />
                         </IconButton>
-                        <IconButton aria-label="delete" className=' translate-x-[3.2em]' onClick={()=>props.onDelete(props.id)}>
-                            <DeleteIcon />
+                        <IconButton aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1em]' onClick={()=>props.onDelete(props.id)}>
+                            <CloseIcon />
                         </IconButton>
+                        <h2 className=' translate-y-[-1.75em] text-black'>
+                            <input className=' h-[80%] w-[98%]' />
+                        </h2>
             </div>
             <div id={props.id} className="divCard invisible">
                 <Card addNewTask={props.addNewTask} title={props.projectTitle} />

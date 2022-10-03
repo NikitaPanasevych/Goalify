@@ -74,10 +74,7 @@ const Dashboard: NextPage = () => {
                         {DBdata.map((data: { id: string, project_title: string }) => <CarouselCard addNewTask={addNewTask} onDelete={deleteProject} id={data.id} projectTitle={data.project_title} />)}
                         <AddNewProject onSave={addProject} />
                     </div>
-
                 }
-
-
             </div>
         </>
     )

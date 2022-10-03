@@ -85,6 +85,22 @@ const Card: React.FC<ISingleCard> = (props) => {
                             </div>
                         )
                     }) : null}
+                    <div id="individualTasksDiv" className="relative block rounded-3xl p-2 my-3 mx-[6em] text-2xl">
+                                <>
+                                    {editVisibility ? <>
+                                        <p id="newTaskParagraph" className="absolute inline w-[100%] p-2 left-0 top-0 text-center rounded-3xl mx-0 text-2xl bg-[#B01030]">{taskData.text}</p>
+                                        <EditIcon onClick={handleEdit} className="absolute right-[2.1em] top-[0.5em] hover:bg-slate-300/20 hover:rounded-xl hover:scale-150 hover:p-1" />
+                                    </>
+                                        : null}
+
+                                    {saveVisibility ? <>
+                                        <input id="newTaskInput" onChange={handleChange} name="text" value={taskData.text} onKeyDown={handleKeyDown} className="absolute inline w-[100%] p-2 left-0 top-0 text-center rounded-3xl mx-0 text-2xl bg-[#B01030]" type="text" placeholder='New task'></input>
+                                        <AddCircleIcon onClick={handleSave} className="absolute right-[2.1em] top-[0.5em] hover:bg-slate-300/20 hover:rounded-xl hover:scale-150 hover:p-1" />
+                                    </>
+                                        : null}
+                                    <DeleteIcon onClick={handleDelete} id="deleteIcon" className="absolute right-[0.6em] top-[0.5em] hover:bg-slate-300/20 hover:rounded-xl hover:scale-150 hover:p-1" />
+                                </>
+                            </div>
                     <p className="block rounded-3xl p-2 my-[4em] mx-[6em] text-2xl bg-[#10B090] hover:bg-[#0D8D73] hover:cursor-pointer" onClick={handleClick}>
                         Add a new task
                     </p>

@@ -1,20 +1,10 @@
 import { NextPage } from "next"
 import {useState, useEffect} from 'react';
 import Router from 'next/router';
-import Dashboard from "./dashboard";
 import Homepage from "../components/Homepage";
 import {auth} from '../firebase_config';
-import { onAuthStateChanged } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {userID} from './login';
-import Logo from "../components/logoLoading"
-import { Button } from "@mui/material"
-import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
-import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
-import IconButton from "@mui/material/IconButton";
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import TaskIcon from '@mui/icons-material/Task';
-import Loading from "../components/Loading";
+import Load from "../components/Loading";
 
 
 
@@ -42,10 +32,9 @@ const Home : NextPage = () => {
 
     return(
         <>
-        {loading ? <Loading />
+        {loading ? <Load />
          : 
          <Homepage />}
-
         </>
        
         

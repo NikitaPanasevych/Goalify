@@ -33,7 +33,7 @@ const Homepage : React.FC = () => {
                 <Logo />
             </motion.div>
 </Link>
-            <h1 className=" text-center text-9xl text-white">Vision</h1>
+            <h1 className=" text-center text-9xl text-white">Goalify</h1>
         </motion.div>)}
         </AnimatePresence>
       </div>

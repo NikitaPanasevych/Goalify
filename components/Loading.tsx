@@ -1,11 +1,14 @@
 import Logo from "./logoLoading";
+import { motion } from "framer-motion";
 
-const Loading : React.FC = () => {
+const Load : React.FC = () => {
     return(
-            <div className=" m-auto">
-                <div className=" text-gray-500 flex text-5xl mb-40">L <Logo /> a d i n g</div>
-            </div>
+            <motion.div
+             className="Bg grid h-screen w-screen"
+             >
+                <div className="flex text-5xl m-auto">L <Logo /> a d i n g</div>
+            </motion.div>
     )
 }
 
-export default Loading;
+export default Load;

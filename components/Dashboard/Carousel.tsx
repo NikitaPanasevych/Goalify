@@ -1,15 +1,15 @@
-import Card from './ExtendedCarousel';
+import Card, { ITaskData } from './ExtendedCarousel';
 import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
 
 interface ICarouselCard {
     projectTitle : string;
     id : string;
     onDelete(id:string):void;
     closeAll?: void;
+    addNewTask(taskData: ITaskData): void;
 }
 
 const CarouselCard:React.FC<ICarouselCard> = (props) => {
@@ -39,7 +39,7 @@ const CarouselCard:React.FC<ICarouselCard> = (props) => {
                         </IconButton>
             </div>
             <div id={props.id} className="divCard invisible">
-                <Card title={props.projectTitle} />
+                <Card addNewTask={props.addNewTask} title={props.projectTitle} />
             </div>
 
                 {/* {visibility ? <Card title={props.projectTitle} /> : null} */}

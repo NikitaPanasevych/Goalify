@@ -14,6 +14,7 @@ import CarouselCard from "../components/Dashboard/Carousel";
 import Loading from "../components/Loading";
 import AddNewProject from "../components/Dashboard/AddNewProject";
 import { IProject } from "../components/Dashboard/AddNewProject";
+import { ITaskData } from "../components/Dashboard/ExtendedCarousel";
 
 const Dashboard: NextPage = () => {
 
@@ -52,12 +53,15 @@ const Dashboard: NextPage = () => {
     }
 
     //Task database functions
-    const addNewTask = (taskText: string) => {
+    const addNewTask = (taskData: ITaskData) => {
         //Update the task information in the database
+        user ? addDoc(collection(database, 'users', user.uid, 'Projects', project_id, 'Tasks'), {taskData}) : null;
+
     }
 
     return (
         <>
+            <title>Dashboard</title>
             <div className=" w-screen h-screen Bg">
                 <Topbar />
                 {loading && !user ?
@@ -67,7 +71,7 @@ const Dashboard: NextPage = () => {
                     :
 
                     <div className="grid grid-flow-col mt-2 h-[94%] overflow-scroll p-4 pr-10">
-                        {DBdata.map((data: { id: string, project_title: string }) => <CarouselCard onDelete={deleteProject} id={data.id} projectTitle={data.project_title} />)}
+                        {DBdata.map((data: { id: string, project_title: string }) => <CarouselCard addNewTask={addNewTask} onDelete={deleteProject} id={data.id} projectTitle={data.project_title} />)}
                         <AddNewProject onSave={addProject} />
                     </div>
 

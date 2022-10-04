@@ -10,7 +10,7 @@ const Homepage : React.FC = () => {
 
     return(
       <>
-      <div className=" w-screen h-screen Bg flex">
+      <div className=" w-screen h-screen bg-black flex">
         <AnimatePresence>
         {!clickLogo &&
         (<motion.div

@@ -6,7 +6,7 @@ import Head from "next/head";
 //firebase
 import { auth } from "../firebase_config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, getDocs } from "firebase/firestore";
+import { collection, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../firebase_config";
 
 //custom templates
@@ -15,7 +15,6 @@ import CarouselCard from "../components/Dashboard/Carousel";
 import Loading from "../components/Loading";
 import AddNewProject from "../components/Dashboard/AddNewProject";
 import { IProject } from "../components/Dashboard/AddNewProject";
-import { ITaskData } from "../components/Dashboard/Carousel";
 
 const Dashboard: NextPage = () => {
 
@@ -24,8 +23,7 @@ const Dashboard: NextPage = () => {
     const [isUpdated, setUpdate] = useState(false);
     let db: CollectionReference<DocumentData>;
 
-    useEffect(() => {
-        if (loading) { console.log('loading'); }
+    useEffect(() => { 
         if (!loading && user) {
             db = collection(database, "users", user.uid, "Projects");
             onSnapshot(db, (data: QuerySnapshot) => {
@@ -37,10 +35,7 @@ const Dashboard: NextPage = () => {
         if (!loading && !user) Router.push('/');
         if (error) alert('Error: ' + error);
         console.log('new useEffect instance');
-    }, [loading, user, error, isUpdated]);
-
-    //Project database functions
-    
+    }, [loading, user, error, isUpdated]);   
 
     const addProject = (projectData: IProject) => {
         user ? addDoc(collection(database, 'users', user.uid, 'Projects'), projectData) : null;
@@ -61,10 +56,9 @@ const Dashboard: NextPage = () => {
                         <Loading />
                     </div>
                     :
-
-                    <div id="" className="grid xl:grid-cols-[repeat(8,1fr)] md:grid-cols-[repeat(4,1fr)] sm:grid-cols-[repeat(3,1fr)] mt-2 h-[94%] p-4 pr-10">
-                        {DBdata.map((data: { id: string, project_title: string }) =>
-                            <CarouselCard id={data.id} projectTitle={data.project_title[0]} />
+                    <div className="grid grid-flow-col overflow-x-auto mt-2 h-[94%] p-4 pr-10">
+                        {DBdata.map((data: { id: string, project_title: string }, index:number) =>
+                            <CarouselCard id={data.id} key={index} projectTitle={data.project_title[0]} />
                         )}
                         <AddNewProject onSave={addProject} />
                     </div>

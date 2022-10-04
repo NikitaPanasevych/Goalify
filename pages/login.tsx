@@ -1,10 +1,7 @@
-
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
 import Head from "next/head";
-
 
 //Components
 import SignUp from "../components/loginComponents/SignUp";

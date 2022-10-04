@@ -1,5 +1,5 @@
 import { NextPage } from "next"
-import {useState, useEffect} from 'react';
+import { useEffect} from 'react';
 import Router from 'next/router';
 import Homepage from "../components/Homepage";
 import {auth} from '../firebase_config';

@@ -10,7 +10,6 @@ import Load from "../components/Loading";
 
 const Home : NextPage = () => {
 
-    const [load, setLoad] = useState(true)
     // Boolean variable to check if user cookies are registered in order to display Dashboard or Guest page 
     const [user, loading, error] = useAuthState(auth);
     //Attaching the observer for authentication
@@ -32,8 +31,9 @@ const Home : NextPage = () => {
 
     return(
         <>
-        {loading ? <Load />
-         : 
+        <title>GOALIFY</title>
+        {loading ? 
+        <Load /> :
          <Homepage />}
         </>
        

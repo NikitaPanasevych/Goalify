@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 //firebase
 import { auth } from "../firebase_config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../firebase_config";
 
 //custom templates
@@ -14,7 +14,7 @@ import CarouselCard from "../components/Dashboard/Carousel";
 import Loading from "../components/Loading";
 import AddNewProject from "../components/Dashboard/AddNewProject";
 import { IProject } from "../components/Dashboard/AddNewProject";
-import { ITaskData } from "../components/Dashboard/ExtendedCarousel";
+import { ITaskData } from "../components/Dashboard/Carousel";
 
 const Dashboard: NextPage = () => {
 
@@ -39,24 +39,11 @@ const Dashboard: NextPage = () => {
     }, [loading, user, error, isUpdated]);
 
     //Project database functions
-    const deleteProject = async (id: string) => {
-        await (user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null);
-    }
+    
 
     const addProject = (projectData: IProject) => {
         user ? addDoc(collection(database, 'users', user.uid, 'Projects'), projectData) : null;
         setUpdate(!isUpdated);
-    }
-
-    const closeAllProjects = () => {
-        // DBdata.map((item) => )
-    }
-
-    //Task database functions
-    const addNewTask = (taskData: ITaskData) => {
-        //Update the task information in the database
-        user ? addDoc(collection(database, 'users', user.uid, 'Projects', project_id, 'Tasks'), {taskData}) : null;
-
     }
 
     return (
@@ -70,8 +57,10 @@ const Dashboard: NextPage = () => {
                     </div>
                     :
 
-                    <div className="grid grid-flow-col mt-2 h-[94%] overflow-scroll p-4 pr-10">
-                        {DBdata.map((data: { id: string, project_title: string }) => <CarouselCard addNewTask={addNewTask} onDelete={deleteProject} id={data.id} projectTitle={data.project_title} />)}
+                    <div id="carousel-container" className="mt-2 h-[94%] p-4 pr-10">
+                        {DBdata.map((data: { id: string, project_title: string }) =>
+                            <CarouselCard id={data.id} projectTitle={data.project_title[0]} />
+                        )}
                         <AddNewProject onSave={addProject} />
                     </div>
                 }

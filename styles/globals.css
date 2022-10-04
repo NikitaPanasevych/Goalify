@@ -266,9 +266,15 @@ nav {
   }
 
   /*	Carousel	*/
+
+  #carousel-container{
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows:auto;
+  }
   
   .card {
-	height: 75px;
+	height: fit-content;
 	width: 200px;
 	color: #eeeeee;
 	background-color: #1363DF;
@@ -278,10 +284,11 @@ nav {
 	transition: 0.4s ease-out;
 	position: relative;
 	left: 0px;
+	padding-bottom: 0;
   }
   
   .card:not(:first-child) {
-	  margin-left: 25px;
+	  /* margin-left: 25px; */
   }
   
   

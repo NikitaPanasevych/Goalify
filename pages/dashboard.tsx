@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Router from 'next/router';
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 //firebase
 import { auth } from "../firebase_config";
@@ -48,7 +49,11 @@ const Dashboard: NextPage = () => {
 
     return (
         <>
+        <Head>
             <title>Dashboard</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Head>
+            
             <div className=" w-screen h-screen Bg">
                 <Topbar />
                 {loading && !user ?
@@ -57,7 +62,7 @@ const Dashboard: NextPage = () => {
                     </div>
                     :
 
-                    <div id="carousel-container" className="mt-2 h-[94%] p-4 pr-10">
+                    <div id="" className="grid xl:grid-cols-[repeat(8,1fr)] md:grid-cols-[repeat(4,1fr)] sm:grid-cols-[repeat(3,1fr)] mt-2 h-[94%] p-4 pr-10">
                         {DBdata.map((data: { id: string, project_title: string }) =>
                             <CarouselCard id={data.id} projectTitle={data.project_title[0]} />
                         )}

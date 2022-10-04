@@ -65,6 +65,10 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
         await (user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null);
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if(e.key === 'Enter') handleAddNewTask();
+    }
+
 
 
     let projectTitleLength: number = 15;
@@ -82,7 +86,7 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                     <CloseIcon />
                 </IconButton>
                 <h2 className=' translate-y-[-1.75em] text-black'>
-                    <input className=' h-[75%] w-[70%]' type="text" placeholder="new task" name="task_name" value={taskData.task_name} onChange={handleChange} />
+                    <input className=' h-[75%] w-[70%]' type="text" placeholder="new task" name="task_name" value={taskData.task_name} onChange={handleChange} onKeyDown={handleKeyDown}/>
                     <span onClick={handleAddNewTask} className="absolute top-0 right-0 translate-x-[-0.2em] translate-y-[0.08em] grid w-10 place-content-center">
                         <motion.button
                             whileHover={{ scale: [null, 1.3, 1.1] }}
@@ -103,7 +107,7 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                         </motion.button>
                     </span>
                 </h2>
-                <div className="-translate-y-[1em]">
+                <div className="-translate-y-[1em] overflow-auto max-h-[15em]">
                     {user ? DBTasks.map((item: any) => {
                         return (<Task taskName={item?.task_name[0]} key={item.id} id={item.id} onDelete={handleDeleteTask} />)
                     }) : null}

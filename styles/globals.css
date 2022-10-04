@@ -10,6 +10,7 @@ font-family: 'Lora', serif; */
 html{
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 1.2em;
+	
 }
 
 
@@ -131,6 +132,7 @@ html{
 
   .Bg {
 	background-image: url("../public/BG.svg");
+	background-repeat: no-repeat;
 	background-size: 100%, 100%;
   }
 
@@ -269,7 +271,7 @@ nav {
 
   #carousel-container{
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(8, 1fr);
 	grid-template-rows:auto;
   }
   

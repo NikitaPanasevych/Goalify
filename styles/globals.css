@@ -245,3 +245,16 @@ nav {
 		scale: 1;
 	}
  }
+
+ .mainContainer{
+	background-color: #fff;
+	width: 20em;
+	color: black;
+ }
+
+ .taskDivContainer{
+	background-color: rgb(133, 133, 133, 0.3);
+ }
+ .taskDivContainer:hover{
+	background-color: rgb(133, 133, 133, 0.5);
+ }

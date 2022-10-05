@@ -22,6 +22,7 @@ const Dashboard: NextPage = () => {
     const [DBdata, setDBdata] = useState<any>([]);
     const [isUpdated, setUpdate] = useState(false);
     let db: CollectionReference<DocumentData>;
+    const [offlineDB, setOfflineDB] = useState<any>([]);
 
     useEffect(() => { 
         if (!loading && user) {
@@ -38,7 +39,9 @@ const Dashboard: NextPage = () => {
     }, [loading, user, error, isUpdated]);   
 
     const addProject = (projectData: IProject) => {
-        user ? addDoc(collection(database, 'users', user.uid, 'Projects'), projectData) : null;
+        user ? addDoc(collection(database, 'users', user.uid, 'Projects'), {
+            project_title: String(projectData.project_title),
+        }) : null;
         setUpdate(!isUpdated);
     }
 
@@ -58,7 +61,7 @@ const Dashboard: NextPage = () => {
                     :
                     <div className="grid grid-flow-col overflow-x-auto mt-2 h-[94%] p-4 pr-10">
                         {DBdata.map((data: { id: string, project_title: string }, index:number) =>
-                            <CarouselCard id={data.id} key={index} projectTitle={data.project_title[0]} />
+                            <CarouselCard id={data.id} key={index} projectTitle={data.project_title} />
                         )}
                         <AddNewProject onSave={addProject} />
                     </div>

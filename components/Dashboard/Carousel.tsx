@@ -26,12 +26,13 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
     const [taskData, setTask] = useState<ITaskData>({
         task_name: ''
     });
+    const [anyCompleted, setAnyCompleted] = useState<boolean>(false);
+    const [infoDivVis, setInfoDivVis] = useState<boolean>(false);
 
     useEffect(() => {
         if (!loading && user) {
             const db: CollectionReference<DocumentData> = collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks');
             const q = query(db, orderBy('timestamp', 'desc'));
-            console.log(q);
             onSnapshot(q, (data: QuerySnapshot) => {
                 setDBTasks(data.docs.map((item: QueryDocumentSnapshot) => {
                     return { ...item.data(), id: item.id }
@@ -59,7 +60,10 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
     }
 
     const deleteProject = async (id: string) => {
-        await (user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null);
+        confirm('Are you sure you want to delete ' + props.projectTitle + ' project?') ? (
+            await (user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null) 
+        ) : ( 
+            null )
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -78,19 +82,31 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
         }) : null
     }
 
+    const handleClearCompleted = (): void => {
+        DBTasks.map((item: any) => {
+            item.completed ? handleDeleteTask(item.id) : null;
+        })
+    }
+
+    const handleIconButton = (): void => {
+        setAnyCompleted(!anyCompleted);
+        document.getElementById('mainDiv'+props.id)?.classList.toggle('mainContainer');
+        document.getElementById('closeIcon'+props.id)?.classList.toggle('translate-x-[9.5em]');
+    }
+
 
     let projectTitleLength: number = 15;
 
     return (
-        <div className="card p-2" >
+        <div id={"mainDiv"+props.id} className="card p-2" >
             <>
                 <h1 className=" text-center h-[20px]">
                     {props.projectTitle?.length > projectTitleLength ? props.projectTitle.substring(0, projectTitleLength - 3) + '...' : props.projectTitle}
                 </h1>
-                <IconButton aria-label="expand" className=" translate-x-[-0.55rem] translate-y-[-1em]">
+                <IconButton onClick={handleIconButton} aria-label="expand" className=" translate-x-[-0.55rem] translate-y-[-1em]">
                     <InfoIcon />
                 </IconButton>
-                <IconButton aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1em]' onClick={() => deleteProject(props.id)}>
+                <IconButton id={'closeIcon'+props.id} aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1em]' onClick={() => deleteProject(props.id)}>
                     <CloseIcon />
                 </IconButton>
                 <h2 className=' translate-y-[-1.75em] text-black'>
@@ -117,8 +133,9 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                 </h2>
                 <div className="-translate-y-[1em] overflow-auto max-h-[30em]">
                     {user ? DBTasks.map((item: any) => {
-                        return (<Task taskName={item?.task_name} key={item.id} id={item.id} onDelete={handleDeleteTask} onSave={handleTaskUpdate} onCompleted={handleTaskCompleted} />)
+                        return (<Task key={item.id} id={item.id} taskName={item?.task_name} completed={item?.completed} onDelete={handleDeleteTask} onSave={handleTaskUpdate} onCompleted={handleTaskCompleted} infoButton={anyCompleted} />)
                     }) : null}
+                    { anyCompleted ? <button type='button' onClick={handleClearCompleted} className='relative text-center w-[100%] mt-4 mb-0 bg-red-600/50 rounded-lg'>Clear completed</button> : null}
                 </div>
             </>
         </div>

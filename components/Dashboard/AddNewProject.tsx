@@ -4,11 +4,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, duration } from '@mui/material';
 import { pink } from '@mui/material/colors';
 
-export interface IProject{
+export interface IProject {
     project_title: string,
 }
 
-interface IAddNewProject{
+interface IAddNewProject {
     onSave(projectData: IProject): void
 }
 
@@ -22,16 +22,20 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
     });
 
     const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProjectData({...projectData, [e.target.name]: [e.target.value]});
+        setProjectData({ ...projectData, [e.target.name]: [e.target.value] });
     }
 
     const onSaveProject = () => {
         setClicked(false);
-        if(projectData.project_title !== "") 
-        {props.onSave(projectData) 
-        projectData.project_title = ''}
-        else
-        alert("Nameless project");
+        if (projectData.project_title !== "") {
+            props.onSave(projectData)
+            projectData.project_title = ''
+        }
+        else alert("Nameless project");
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === 'Enter') onSaveProject();
     }
 
     return (
@@ -54,11 +58,12 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                             <div className="relative w-[80%] m-auto mt-0">
                                 <input
                                     onChange={handleData}
+                                    onKeyDown={handleKeyDown}
                                     name="project_title"
-                                    value={projectData.project_title} 
-                                    className=" w-[95%] mb-1"
+                                    value={projectData.project_title}
+                                    className=" w-[95%] mb-1 rounded-md pl-2 py-[0.1em]"
                                 />
-                                <span className="absolute top-0 right-0 grid w-10 place-content-center">
+                                <span className="absolute top-[0.1em] right-0 grid w-10 place-content-center">
                                     <motion.button
                                         whileHover={{ scale: [null, 1.3, 1.1] }}
                                         transition={{ duration: 0.3 }}

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import InfoIcon from '@mui/icons-material/Info';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase_config';
-import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, getDocs, DocumentSnapshot } from "firebase/firestore";
+import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, orderBy, updateDoc, Timestamp, query } from "firebase/firestore";
 import { database } from '../../firebase_config';
 import Task from './TaskList';
 
@@ -29,8 +29,10 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
 
     useEffect(() => {
         if (!loading && user) {
-            const db: CollectionReference<DocumentData> = collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks')
-            onSnapshot(db, (data: QuerySnapshot) => {
+            const db: CollectionReference<DocumentData> = collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks');
+            const q = query(db, orderBy('timestamp', 'desc'));
+            console.log(q);
+            onSnapshot(q, (data: QuerySnapshot) => {
                 setDBTasks(data.docs.map((item: QueryDocumentSnapshot) => {
                     return { ...item.data(), id: item.id }
                 }));
@@ -43,7 +45,11 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
     }
 
     const handleAddNewTask = () => {
-        user ? addDoc(collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks'), taskData) : null;
+        user ? addDoc(collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks'), {
+            task_name: String(taskData.task_name),
+            completed: false,
+            timestamp: Timestamp.now(),
+        }) : null;
         setTask({ ...taskData, task_name: '' });
         setIsUpdated(!isUpdated);
     }
@@ -58,6 +64,18 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if(e.key === 'Enter') handleAddNewTask();
+    }
+
+    const handleTaskUpdate = (id: string, newTaskName: string) => {
+        user ? updateDoc(doc(database, 'users', user.uid, 'Projects', props.id, 'Tasks', id), {
+            task_name: newTaskName,
+        }) : null
+    }
+
+    const handleTaskCompleted = (id: string, state: boolean) => {
+        user ? updateDoc(doc(database, 'users', user.uid, 'Projects', props.id, 'Tasks', id), {
+            completed: state,
+        }) : null
     }
 
 
@@ -97,9 +115,9 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                         </motion.button>
                     </span>
                 </h2>
-                <div className="-translate-y-[1em] overflow-auto max-h-[15em]">
+                <div className="-translate-y-[1em] overflow-auto max-h-[30em]">
                     {user ? DBTasks.map((item: any) => {
-                        return (<Task taskName={item?.task_name[0]} key={item.id} id={item.id} onDelete={handleDeleteTask} />)
+                        return (<Task taskName={item?.task_name} key={item.id} id={item.id} onDelete={handleDeleteTask} onSave={handleTaskUpdate} onCompleted={handleTaskCompleted} />)
                     }) : null}
                 </div>
             </>

@@ -44,8 +44,8 @@ const SignUp: React.FC = () => {
       }}
     >
       <div className=" h-[15rem] grid align-middle justify-center text-center mt-5 " >
-        <TextField className="mt-2 mb-2 w-[15em]" name="username" label="Username" onChange={handleChange} value={userUserName} variant="outlined" onKeyDown={handleKeyDown}/>
-        <TextField className="mt-2 mb-2 w-[15em]" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" onKeyDown={handleKeyDown}/>
+        <TextField className=" mt-2 mb-2 w-[15em]" name="username" label="Username" onChange={handleChange} value={userUserName} variant="outlined" onKeyDown={handleKeyDown}/>
+        <TextField className=" mt-2 mb-2 w-[15em]" name="email" label="Email" onChange={handleChange} value={userEmail} variant="outlined" onKeyDown={handleKeyDown}/>
         <div className="mt-1 mb-1 w-[15em]">
           <TextField className="w-[15em]" type="password" id="user-password" name="password" onChange={handleChange} value={userPassword} label="Password" variant="outlined" onKeyDown={handleKeyDown}/>
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}

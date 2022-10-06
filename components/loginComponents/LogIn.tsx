@@ -58,11 +58,10 @@ return (
           <TextField type="password" className="w-[15em]" name="password" id="user-password" label="Password" onChange={handleChange} value={userPassword} variant="outlined" onKeyDown={handleKeyDown} />
           {!showPass ? <VisibilityIcon className="visibilityOn" onClick={showPassword} /> : <VisibilityOffIcon className="visibilityOff" onClick={showPassword} />}
         </div>
-        <div className=" grid">
-          <Button className=" w-40 m-auto mt-5" variant="outlined" onClick={handleSignIn}>Log In</Button>
+        <div className=" m-auto">
+          <Button className=" w-40 h-10 mt-5" variant="contained" onClick={handleSignIn}>Log In</Button>
         </div>
-        <a href="" className=" mt-5">Forgot your password?</a>
-        <hr className="text-black" />
+        <hr className="text-black mt-8" />
       </div>
     </motion.div>
   )

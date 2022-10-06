@@ -10,12 +10,6 @@ html{
 	
 }
 
-/* Login page  */
-.login-page-Bg {
-	background-image: url("../public/layered-waves-haikei\ \(2\).svg");
-	background-size: 100%, 100%;
-}
-
 
 .login-page{
 	margin: 4em auto;
@@ -43,7 +37,7 @@ html{
 	padding-top: 1em;
 }
 .login-page .form  input{
-	background-color: rgb(240, 240, 240, 0.5);
+	
 	display: block;
 	margin: 1em auto;
 	padding: .2em .5em;
@@ -127,9 +121,7 @@ html{
   }
 
   .Bg {
-	background-image: url("../public/BG.svg");
-	background-repeat: no-repeat;
-	background-size: 100%, 100%;
+	background-color: #16161a;
   }
 
 /**/
@@ -188,7 +180,7 @@ nav {
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   }
   #nav-1 {
-	background: #000000;
+	background: #7f5af0;
   }
   
   
@@ -218,8 +210,8 @@ nav {
   .card {
 	height: fit-content;
 	width: 200px;
-	color: #eeeeee;
-	background-color: #1363DF;
+	color: #fffffe;
+	background-color: #242629;
 	border-radius: 10px;
 	box-shadow: -1rem 0 1rem #000;
     margin-right: 50px; 
@@ -247,14 +239,9 @@ nav {
  }
 
  .mainContainer{
-	background-color: #fff;
+	background-color: black;
 	width: 20em;
-	color: black;
+	color: white;
  }
 
- .taskDivContainer{
-	background-color: rgb(133, 133, 133, 0.3);
- }
- .taskDivContainer:hover{
-	background-color: rgb(133, 133, 133, 0.5);
- }
+

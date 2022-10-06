@@ -4,6 +4,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase_config';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ITaskList {
     taskName: string,
@@ -19,7 +20,6 @@ const Task: React.FC<ITaskList> = (props) => {
 
     const [taskActionVis, setTaskActionVis] = useState(false);
     const [taskEditVis, setTaskEditVis] = useState(false);
-    const [user, loading, error] = useAuthState(auth);
     const [taskName, setTaskName] = useState<string>(props.taskName)
 
     useEffect(() => {
@@ -32,8 +32,6 @@ const Task: React.FC<ITaskList> = (props) => {
     const handleDivClick = (): void => {
         const docRef = document.getElementById('h1'+props.id);
         docRef?.classList.toggle('line-through');
-        document.getElementById('taskDivContainer'+props.id)?.classList.toggle('bg-sky-600');
-        document.getElementById('taskDivContainer'+props.id)?.classList.toggle('bg-black-400/50');
         if(docRef?.classList.contains('line-through')) {
             props.onCompleted(props.id, true);
             
@@ -64,17 +62,22 @@ const Task: React.FC<ITaskList> = (props) => {
     }
 
     return (
-        <>
-            <div id={'taskDivContainer'+props.id} className="relative bg-sky-600 rounded-md mb-1  hover:bg-sky-700" onMouseOver={() => setTaskActionVis(true)} onMouseOut={() => setTaskActionVis(false)}>
+            <motion.div
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            transition={{delay:0.2, ease:"easeIn"}}
+            id={'taskDivContainer'+props.id}
+            onClick={handleDivClick}
+            className="relative border-[0.1px] cursor-pointer overflow-x-auto border-[#fffffe] text-[#fffffe] rounded-md mb-1  hover:bg-[#7f5af0]" onMouseOver={() => setTaskActionVis(true)} onMouseOut={() => setTaskActionVis(false)}>
                 {taskEditVis ? (
                     <>
-                        <input id={'input'+props.id} onChange={handleInputChange} onClick={handleDivClick} onKeyDown={handleKeyDown} className="inline text-black bg-slate-300 rounded-md pl-2 w-[100%] focus:outline-none border-0" value={taskName} />
+                        <input id={'input'+props.id} onChange={handleInputChange}  onKeyDown={handleKeyDown} className="inline text-black bg-slate-300 rounded-md pl-2 w-[100%] focus:outline-none border-0" value={taskName} />
                         <CheckIcon onClick={handleSave} titleAccess='Save task' className="inline absolute text-black right-1 hover:cursor-pointer p-1 hover:bg-slate-300/20 hover:rounded-xl" />
 
                     </>
                 ) : (
                     <>
-                        <h1 onClick={handleDivClick} title='Complete task' id={'h1'+props.id} className="inline  px-2 hover:cursor-pointer" >{taskName}</h1>
+                        <h1  title='Complete task' id={'h1'+props.id} className="inline  px-2 hover:cursor-pointer" >{taskName}</h1>
                         { (taskActionVis && !props.completed) ? (
                             <>
                                 <EditIcon onClick={handleEdit} titleAccess='Edit task' className="inline absolute right-5 hover:cursor-pointer p-1 hover:bg-slate-300/20 hover:rounded-xl" />
@@ -84,11 +87,7 @@ const Task: React.FC<ITaskList> = (props) => {
                         )}
                     </>
                 )}
-
-                
-
-            </div>
-        </>
+            </motion.div>
     );
 }
 

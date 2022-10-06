@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { motion } from 'framer-motion';
-import InfoIcon from '@mui/icons-material/Info';
+import ExpandIcon from '@mui/icons-material/Expand';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase_config';
 import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, orderBy, updateDoc, Timestamp, query } from "firebase/firestore";
 import { database } from '../../firebase_config';
 import Task from './TaskList';
+import { blue } from '@mui/material/colors';
 
 export interface ITaskData {
     task_name: string,
@@ -27,7 +28,6 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
         task_name: ''
     });
     const [anyCompleted, setAnyCompleted] = useState<boolean>(false);
-    const [infoDivVis, setInfoDivVis] = useState<boolean>(false);
 
     useEffect(() => {
         if (!loading && user) {
@@ -88,26 +88,24 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
         })
     }
 
-    const handleIconButton = (): void => {
+    const handleExpand = (): void => {
         setAnyCompleted(!anyCompleted);
         document.getElementById('mainDiv'+props.id)?.classList.toggle('mainContainer');
         document.getElementById('closeIcon'+props.id)?.classList.toggle('translate-x-[9.5em]');
     }
-
-
-    let projectTitleLength: number = 15;
+    
 
     return (
-        <div id={"mainDiv"+props.id} className="card p-2" >
+        <div id={"mainDiv"+props.id} className="card p-2 " >
             <>
-                <h1 className=" text-center h-[20px]">
-                    {props.projectTitle?.length > projectTitleLength ? props.projectTitle.substring(0, projectTitleLength - 3) + '...' : props.projectTitle}
-                </h1>
-                <IconButton onClick={handleIconButton} aria-label="expand" className=" translate-x-[-0.55rem] translate-y-[-1em]">
-                    <InfoIcon />
+                <div className=" text-center break-words">
+                    {props.projectTitle}
+                </div>
+                <IconButton  onClick={handleExpand}  aria-label="expand" className=" translate-x-[-0.55rem] translate-y-[-1.25em]">
+                    <ExpandIcon sx={{color: 'white'}} />
                 </IconButton>
-                <IconButton id={'closeIcon'+props.id} aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1em]' onClick={() => deleteProject(props.id)}>
-                    <CloseIcon />
+                <IconButton id={'closeIcon'+props.id} aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1.25em]' onClick={() => deleteProject(props.id)}>
+                    <CloseIcon sx={{color: "white"}} />
                 </IconButton>
                 <h2 className=' translate-y-[-1.75em] text-black'>
                     <input className=' h-[75%] w-[70%]' type="text" placeholder="new task" name="task_name" value={taskData.task_name} onChange={handleChange} onKeyDown={handleKeyDown}/>
@@ -116,7 +114,7 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                             whileHover={{ scale: [null, 1.3, 1.1] }}
                             transition={{ duration: 0.3 }}
                             type="button"
-                            className="text-white bg-blue-700 p-0.5 rounded-sm"
+                            className="text-white bg-[#7f5af0] p-0.5 rounded-sm"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

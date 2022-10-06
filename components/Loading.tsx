@@ -6,7 +6,7 @@ const Load : React.FC = () => {
         <>
         <title>GOALIFY</title>
             <motion.div
-             className="Bg grid h-screen w-screen"
+             className="bg-[#7f5af0] grid h-screen w-screen"
              >
                 <div className="flex text-5xl m-auto">L <Logo /> a d i n g</div>
             </motion.div>

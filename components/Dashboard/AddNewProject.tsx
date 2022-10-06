@@ -49,7 +49,7 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                         exit={{ opacity: 0 }}
                         className=" h-[75px] w-[200px]"
                     >
-                        <div className='h-[77px] w-[202px] bg-[#D61C4E] ml-[25px] mr-[25px] rounded-[10px] grid'>
+                        <div className='h-[77px] w-[202px] bg-[#D61C4E]  mr-[25px] rounded-[10px] grid'>
                             <div className='h-[40%] w-[100%] text-center'>
                                 <Button sx={{ color: pink[50] }} onClick={() => setClicked(false)}>
                                     Close <CloseIcon />
@@ -109,7 +109,6 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                 text-xl 
                 cursor-pointer 
                 border-white 
-                ml-[25px]
                 h-[75px] 
                 hover:border-[#D61C4E]
                 hover:text-[#D61C4E] 

@@ -12,19 +12,16 @@ import { Button } from "@mui/material";
 //firebase
 import { Opacity, Translate } from "@mui/icons-material";
 
-export let userID: string = '';
-
-
 const Login: NextPage = () => {
 
-  // Variables and hooks
-  const [mode, setMode] = useState<string>("signup");
+// Variables and hooks
+const [mode, setMode] = useState<string>("signup");
 
-  // New branch login-test created
+// New branch login-test created
 
   return (
 
-    <div className="flex Bg h-screen">
+    <div className="flex bg-[#7f5af0] h-screen">
       <Head>
             <title>Login</title>
         </Head>
@@ -35,13 +32,13 @@ const Login: NextPage = () => {
         duration: 0.5,
         delay: 0.2,
       }}
-      className="login-page pt-5 bg-gradient-to-t from-white to-[#FFF89A] rounded-xl"
+      className="login-page pt-5 border-2  rounded-xl"
        >
-        <div className="huyi grid">
-          <h1><a href='/guest'>Goalify</a></h1>
+        <div className=" grid">
+          <h1 className="text-white">Goalify</h1>
           <ButtonGroup className=" m-auto" variant="text" aria-label="outlined button group">
-            {mode === 'signup' ?  <Button disabled>Sign up</Button> : <Button name="signup" onClick={() => {setMode("signup")}}>Sign up</Button>}
-            {mode === "login" ? <Button disabled>Log In</Button> : <Button name="login" onClick={() => {setMode("login")}}>Log in</Button>}
+            {mode === 'signup' ?  <Button className=" w-30 h-10" variant="contained" disabled>Sign up</Button> : <Button className=" w-30 h-10" variant="contained" name="signup" onClick={() => {setMode("signup")}}>Sign up</Button>}
+            {mode === "login" ? <Button className=" w-30 h-10" variant="contained" disabled>Log In</Button> : <Button className=" w-30 h-10" variant="contained" name="login" onClick={() => {setMode("login")}}>Log in</Button>}
           </ButtonGroup>
         </div>
         {mode === "signup" ? <SignUp /> : <LogIn />}

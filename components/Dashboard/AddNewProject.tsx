@@ -47,9 +47,9 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3 }}
                         exit={{ opacity: 0 }}
-                        className=" h-[75px] w-[200px]"
+                        className=" h-[100px] w-[200px]"
                     >
-                        <div className='h-[77px] w-[202px] bg-[#D61C4E]  mr-[25px] rounded-[10px] grid'>
+                        <div className='h-[108px] w-[200px] border-2  bg-[#7f5af0]  mr-[25px] rounded-[10px] grid'>
                             <div className='h-[40%] w-[100%] text-center'>
                                 <Button sx={{ color: pink[50] }} onClick={() => setClicked(false)}>
                                     Close <CloseIcon />
@@ -61,7 +61,7 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                                     onKeyDown={handleKeyDown}
                                     name="project_title"
                                     value={projectData.project_title}
-                                    className=" w-[95%] mb-1 rounded-md pl-2 py-[0.1em]"
+                                    className=" w-[95%] mb-3 rounded-md pl-2 py-[0.1em]"
                                 />
                                 <span className="absolute top-[0.1em] right-0 grid w-10 place-content-center">
                                     <motion.button
@@ -69,7 +69,7 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                                         transition={{ duration: 0.3 }}
                                         onClick={onSaveProject}
                                         type="button"
-                                        className="text-white bg-rose-600 p-0.5 rounded-full"
+                                        className="text-white bg-[#7f5af0] p-0.5 rounded-full"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
-                        className=" h-[75px] w-[200px]"
+                        className=" h-[100px] w-[200px]"
                     >
                         <div onClick={() => setClicked(true)}
                             className=" 
@@ -107,9 +107,10 @@ const AddNewProject: React.FC<IAddNewProject> = (props) => {
                 mr-[25px] 
                 border-[2px]
                 text-xl 
+                pt-3
                 cursor-pointer 
                 border-white 
-                h-[75px] 
+                h-[100px] 
                 hover:border-[#D61C4E]
                 hover:text-[#D61C4E] 
                 transition ease-in-out delay-[30] ">

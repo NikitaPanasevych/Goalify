@@ -96,9 +96,13 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
     
 
     return (
-        <div id={"mainDiv"+props.id} className="card p-2 " >
+        <motion.div
+        initial={{scale:0.5, opacity:0}}
+        animate={{scale:1, opacity:1}}
+        transition={{duration:0.1, ease:"easeIn"}}
+         id={"mainDiv"+props.id} className="card p-2 " >
             <>
-                <div className=" text-center break-words">
+                <div className=" m-auto text-center break-words w-[7em]">
                     {props.projectTitle}
                 </div>
                 <IconButton  onClick={handleExpand}  aria-label="expand" className=" translate-x-[-0.55rem] translate-y-[-1.25em]">
@@ -136,7 +140,7 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                     { anyCompleted ? <button type='button' onClick={handleClearCompleted} className='relative text-center w-[100%] mt-4 mb-0 bg-red-600/50 rounded-lg'>Clear completed</button> : null}
                 </div>
             </>
-        </div>
+        </motion.div>
     )
 }
 

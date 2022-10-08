@@ -8,7 +8,6 @@ import { auth } from '../../firebase_config';
 import { collection, deleteDoc, doc, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, orderBy, updateDoc, Timestamp, query } from "firebase/firestore";
 import { database } from '../../firebase_config';
 import Task from './TaskList';
-import { blue } from '@mui/material/colors';
 
 export interface ITaskData {
     task_name: string,
@@ -46,24 +45,26 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
     }
 
     const handleAddNewTask = () => {
-        user ? addDoc(collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks'), {
+        user && addDoc(collection(database, 'users', user.uid, 'Projects', props.id, 'Tasks'), {
             task_name: String(taskData.task_name),
             completed: false,
             timestamp: Timestamp.now(),
-        }) : null;
+        });
         setTask({ ...taskData, task_name: '' });
         setIsUpdated(!isUpdated);
     }
 
     const handleDeleteTask = async (id: string) => {
-        await (user ? deleteDoc(doc(database, 'users', user.uid, 'Projects', props.id, 'Tasks', id)) : null);
+        await (user && deleteDoc(doc(database, 'users', user.uid, 'Projects', props.id, 'Tasks', id)));
     }
 
     const deleteProject = async (id: string) => {
-        confirm('Are you sure you want to delete ' + props.projectTitle + ' project?') ? (
-            await (user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null) 
-        ) : ( 
-            null )
+        confirm('Are you sure you want to delete ' + props.projectTitle + ' project?') && (
+            await (user &&
+                    DBTasks.map((element:any) => {
+                        handleDeleteTask(element.id)
+                    })))
+           user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null  
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {

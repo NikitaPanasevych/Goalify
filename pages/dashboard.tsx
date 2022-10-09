@@ -1,39 +1,73 @@
 import { NextPage } from "next";
 import Router from 'next/router';
-import { useEffect } from "react";
-import Topbar from "../components/Topbar";
+import { useEffect, useState } from "react";
+import Head from "next/head";
 
+//firebase
 import { auth } from "../firebase_config";
-import { AuthStateHook, useAuthState } from "react-firebase-hooks/auth";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { collection, QuerySnapshot, QueryDocumentSnapshot, onSnapshot, CollectionReference, DocumentData, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../firebase_config";
+
+//custom templates
+import Topbar from "../components/Topbar";
+import CarouselCard from "../components/Dashboard/Carousel";
+import Loading from "../components/Loading";
+import AddNewProject from "../components/Dashboard/AddNewProject";
+import { IProject } from "../components/Dashboard/AddNewProject";
 
 const Dashboard: NextPage = () => {
 
     const [user, loading, error] = useAuthState(auth);
+    const [DBdata, setDBdata] = useState<any>([]);
+    const [isUpdated, setUpdate] = useState(false);
+    let db: CollectionReference<DocumentData>;
+    const [offlineDB, setOfflineDB] = useState<any>([]);
 
-    useEffect(() => {
-        if(loading) return;
-        if(!user) Router.push('/');
-        if(user) Router.push('/dashboard');
-        const fetchUserData = async () => {
-            try {
-                const q = query(collection(database, 'users'), where('userID', '==', user?.uid))
-            } catch(err) {
-                console.error(err);
-                alert("error occured while fetching data")
-            }
+    useEffect(() => { 
+        if (!loading && user) {
+            db = collection(database, "users", user.uid, "Projects");
+            onSnapshot(db, (data: QuerySnapshot) => {
+                    setDBdata(data.docs.map((item: QueryDocumentSnapshot) => {
+                        return { ...item.data(), id: item.id }
+                    }));
+            });
         }
-        fetchUserData();
-    }, [loading, user])
+        if (!loading && !user) Router.push('/');
+        if (error) alert('Error: ' + error);
+        console.log('new useEffect instance');
+    }, [loading, user, error, isUpdated]);   
 
-    return(
-        <div className=" w-screen h-screen bg-gradient-to-tr from-[#354259] to-[#3F1C1C]">
-            <Topbar />
-            <div>
-                <h1>Welcome, {user?.displayName}</h1>
+    const addProject = (projectData: IProject) => {
+        user ? addDoc(collection(database, 'users', user.uid, 'Projects'), {
+            project_title: String(projectData.project_title),
+        }) : null;
+        setUpdate(!isUpdated);
+    }
+
+    return (
+        <>
+        <Head>
+            <title>Dashboard</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Head>
+            
+            <div className=" w-screen h-screen Bg">
+                <Topbar />
+                {loading && !user ?
+                    <div className=" grid h-[80%]">
+                        <Loading />
+                    </div>
+                    :
+                    <div className="grid grid-flow-col overflow-x-auto mt-2 h-[94%] p-4 pr-10">
+                        {DBdata.map((data: { id: string, project_title: string }, index:number) =>
+                            <CarouselCard id={data.id} key={index} projectTitle={data.project_title} />
+                        )}
+                        <AddNewProject onSave={addProject} />
+                    </div>
+                }
             </div>
-        </div>
+        </>
     )
 }
 

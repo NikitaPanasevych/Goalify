@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Lora&display=swap');
-/* font-family: 'Aboreto', cursive;
-font-family: 'Lora', serif; */
 
 @tailwind base;
 @tailwind components;
@@ -10,19 +7,12 @@ font-family: 'Lora', serif; */
 html{
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 1.2em;
-}
-
-
-/* Login page  */
-.login-page-Bg {
-	background-image: url("../public/layered-waves-haikei\ \(2\).svg");
-	background-size: 100%, 100%;
+	
 }
 
 
 .login-page{
 	margin: 4em auto;
-	margin-left: 50%;
 	width: 40rem;
 }
 
@@ -47,7 +37,7 @@ html{
 	padding-top: 1em;
 }
 .login-page .form  input{
-	background-color: rgb(240, 240, 240, 0.5);
+	
 	display: block;
 	margin: 1em auto;
 	padding: .2em .5em;
@@ -117,19 +107,9 @@ html{
 /* Guest.tsx */
 
 .logo {
-	animation: rotation 24s infinite linear;
+	animation: rotation 16s infinite linear;
   }
 
-.arrow {
-	fill: #9ADCFF;
-	animation: arrow 4s infinite linear;
-}
-
-	@keyframes arrow {
-		0% { fill: #9ADCFF; }
-		50% {fill: #FFF89A}
-		100% { fill: #9ADCFF; }
-	}
   
   @keyframes rotation {
 	from {
@@ -141,7 +121,7 @@ html{
   }
 
   .Bg {
-	background-image: radial-gradient(#3D0000 40%, #000000 60%);
+	background-color: #16161a;
   }
 
 /**/
@@ -200,57 +180,10 @@ nav {
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   }
   #nav-1 {
-	background: #000000;
+	background: #7f5af0;
   }
   
   
-  .link-1 {
-	transition: 0.3s ease;
-	background: #000000;
-	color: #ffffff;
-	font-size: 20px;
-	text-decoration: none;
-	border-top: 4px solid #000000;
-	border-bottom: 4px solid #000000;
-	padding: 20px 0;
-	margin: 0 20px;
-  }
-  .link-1:hover {
-	border-top: 4px solid #ffffff;
-	border-bottom: 4px solid #ffffff;
-	padding: 6px 0; 
-  }
-  
-  .link-2 {
-	transition: 0.6s;
-	color: #ffffff;
-	font-size: 20px;
-	text-decoration: none;
-	border-right: 2px dotted transparent;
-	padding: 30px 8px 0 10px;
-	margin: 0 10px;
-  }
-  .link-2:hover {
-	border-right: 2px dotted #ffffff;
-	padding-bottom: 24px;
-  }
-  .link-3 {
-	transition: 0.4s;
-	color: #ffffff;
-	font-size: 20px;
-	text-decoration: none;
-	padding: 0 10px;
-	margin: 0 10px;
-  }
-  .link-3:hover {
-	background-color: #ffffff;
-	color: #EEA200;
-	padding: 24px 10px;
-  }
-
-  /* Scrollbar */
-
-  /* width */
 ::-webkit-scrollbar {
 	width: 10px;
 	opacity: 0;
@@ -270,3 +203,47 @@ nav {
   ::-webkit-scrollbar-thumb:hover {
 	background: #555;
   }
+
+  /*	Carousel	*/
+
+  
+  .card {
+	height: fit-content;
+	width: 200px;
+	color: #fffffe;
+	background-color: #242629;
+	border-radius: 10px;
+	box-shadow: -1rem 0 1rem #000;
+    margin-right: 50px; 
+	transition: 0.4s ease-out;
+	position: relative;
+	left: 0px;
+	padding-bottom: 0;
+  }
+  
+  .card:hover .stroke {
+	stroke-dashoffset: 100;
+	transition: 0.6s ease-out;
+  }
+  
+
+ @keyframes anim-tasksCard{
+	from {
+		translate: -35em -20em;
+		scale: 0;
+	}
+	to {
+		translate: 0 0;
+		scale: 1;
+	}
+ }
+
+ .mainContainer{
+	background-color: black;
+	width: 20em;
+	color: white;
+ }
+
+
+
+

@@ -92,7 +92,6 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
     const handleExpand = (): void => {
         setAnyCompleted(!anyCompleted);
         document.getElementById('mainDiv'+props.id)?.classList.toggle('mainContainer');
-        document.getElementById('closeIcon'+props.id)?.classList.toggle('translate-x-[9.5em]');
     }
     
 
@@ -109,9 +108,13 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                 <IconButton  onClick={handleExpand}  aria-label="expand" className=" translate-x-[-0.55rem] translate-y-[-1.25em]">
                     <ExpandIcon sx={{color: 'white'}} />
                 </IconButton>
-                <IconButton id={'closeIcon'+props.id} aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1.25em]' onClick={() => deleteProject(props.id)}>
-                    <CloseIcon sx={{color: "white"}} />
-                </IconButton>
+                {
+                !anyCompleted?
+                    <IconButton id={'closeIcon'+props.id} aria-label="delete" className=' translate-x-[3.5em] translate-y-[-1.25em]' onClick={() => deleteProject(props.id)}>
+                            <CloseIcon sx={{color: "white"}} />
+                    </IconButton>
+                :null
+                }
                 <h2 className=' translate-y-[-1.75em] text-black'>
                     <input className=' h-[75%] w-[70%]' type="text" placeholder="new task" name="task_name" value={taskData.task_name} onChange={handleChange} onKeyDown={handleKeyDown}/>
                     <span onClick={handleAddNewTask} className="absolute top-0 right-0 translate-x-[-0.2em] translate-y-[0.08em] grid w-10 place-content-center">

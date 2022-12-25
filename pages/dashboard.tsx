@@ -59,7 +59,7 @@ const Dashboard: NextPage = () => {
                         <Loading />
                     </div>
                     :
-                    <div className="grid grid-flow-col overflow-x-auto mt-2 h-[94%] p-4 pr-10">
+                    <div className="flex flex-flow-col overflow-x-auto mt-2 h-[94%] p-4 pr-10">
                         {DBdata.map((data: { id: string, project_title: string }, index:number) =>
                             <CarouselCard id={data.id} key={index} projectTitle={data.project_title} />
                         )}

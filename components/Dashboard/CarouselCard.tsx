@@ -38,7 +38,7 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                 }));
             });
         }
-    }, [user, loading, error, isUpdated])
+    })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTask({ ...taskData, [e.target.name]: [e.target.value] });
@@ -64,7 +64,7 @@ const CarouselCard: React.FC<ICarouselCard> = (props) => {
                     DBTasks.map((element:any) => {
                         handleDeleteTask(element.id)
                     })))
-           user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null  
+           user ? deleteDoc(doc(database, "users", user.uid, "Projects", id)) : null
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
